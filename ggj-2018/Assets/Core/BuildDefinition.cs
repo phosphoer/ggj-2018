@@ -10,7 +10,7 @@ using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "new-build-definition", menuName = "BoatGame/Build Definition")]
+[CreateAssetMenu(fileName = "new-build-definition", menuName = "Build Definition")]
 public class BuildDefinition : ScriptableObject
 {
   public string LocationPathName = "relative/path/build.exe";
@@ -31,7 +31,7 @@ public class BuildDefinition : ScriptableObject
 
     if (!string.IsNullOrEmpty(ProductNameOverride)) PlayerSettings.productName = ProductNameOverride;
     if (!string.IsNullOrEmpty(CompanyNameOverride)) PlayerSettings.companyName = CompanyNameOverride;
-    
+
     // Build scene list
     List<string> sceneList = new List<string>();
     foreach (SceneField scene in Scenes)
