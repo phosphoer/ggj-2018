@@ -78,7 +78,7 @@ public class Character : MonoBehaviour
   {
     item.transform.SetPositionAndRotation(_heldItemAnchor.position, _heldItemAnchor.rotation);
 
-    Vector3 throwForce = transform.TransformDirection(_throwForceLocal) * 2;
+    Vector3 throwForce = transform.TransformDirection(_throwForceLocal) * 1.5f;
     item.Rigidbody.AddForce(throwForce, ForceMode.Impulse);
   }
 

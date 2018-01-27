@@ -108,6 +108,8 @@ public class PlayerController : MonoBehaviour
 
     // Spawn the camera
     _cameraRig = Instantiate(_playerCameraPrefab, transform);
+    _cameraRig.TrackedTransform = _character.transform;
+
     if (Camera.main != null)
     {
       _cameraRig.transform.SetPositionAndRotation(Camera.main.transform.position, Camera.main.transform.rotation);
