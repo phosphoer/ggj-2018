@@ -4,6 +4,9 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
+  public PlayerTeam PlayerTeam { get; set; }
+  public Character Character { get { return _character; } }
+
   [SerializeField]
   private Player _player = null;
 
@@ -70,6 +73,20 @@ public class PlayerController : MonoBehaviour
         }
       }
     }
+
+    // Transmit an item if we have one and the button is pressed
+    if (_character.HeldItem != null && _rewiredPlayer.GetButtonDown(InputActions.Transmit))
+    {
+      PlayerController targetPlayer = PlayerTeam.GetOtherPlayer(this);
+      if (targetPlayer != null)
+      {
+        _character.TransmitItem(targetPlayer.Character);
+      }
+      else
+      {
+        Debug.LogError("Tried to transmit an item but no second player");
+      }
+    }
   }
 
   private void OnPlayerSpawned(Transform spawnPoint)
@@ -91,8 +108,15 @@ public class PlayerController : MonoBehaviour
 
     // Spawn the camera
     _cameraRig = Instantiate(_playerCameraPrefab, transform);
-    _cameraRig.transform.position = new Vector3(0, 4, -10);
-    _cameraRig.transform.LookAt(Vector3.zero);
+    if (Camera.main != null)
+    {
+      _cameraRig.transform.SetPositionAndRotation(Camera.main.transform.position, Camera.main.transform.rotation);
+    }
+    else
+    {
+      _cameraRig.transform.position = new Vector3(0, 4, -10);
+      _cameraRig.transform.LookAt(Vector3.zero);
+    }
 
     // Update splitscreen
     _splitscreenPlayer.PlayerCamera = _cameraRig.Camera;

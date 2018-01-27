@@ -53,6 +53,33 @@ public class Character : MonoBehaviour
       _heldItem.Rigidbody.AddForce(throwForce, ForceMode.Impulse);
       _heldItem = null;
     }
+    else
+    {
+      Debug.LogError("Tried to drop an item but not holding anything");
+    }
+  }
+
+  public void TransmitItem(Character targetCharacter)
+  {
+    if (_heldItem != null)
+    {
+      _heldItem.transform.SetParent(_heldItemOriginalParent);
+      _heldItem.IsBeingHeld = false;
+      targetCharacter.ReceiveItem(_heldItem);
+      _heldItem = null;
+    }
+    else
+    {
+      Debug.LogError("Tried to transmit an item but not holding anything");
+    }
+  }
+
+  public void ReceiveItem(Item item)
+  {
+    item.transform.SetPositionAndRotation(_heldItemAnchor.position, _heldItemAnchor.rotation);
+
+    Vector3 throwForce = transform.TransformDirection(_throwForceLocal) * 2;
+    item.Rigidbody.AddForce(throwForce, ForceMode.Impulse);
   }
 
   private void Update()

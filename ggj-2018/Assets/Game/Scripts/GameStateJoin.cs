@@ -9,6 +9,8 @@ public class GameStateJoin : ActionBase
   [SerializeField]
   private Transform[] _spawnPoints = null;
 
+  private PlayerTeam _currentTeam;
+
   protected override IEnumerator DoActionAsync()
   {
     yield return null;
@@ -29,6 +31,17 @@ public class GameStateJoin : ActionBase
     if (_spawnPoints.Length > spawnIndex)
     {
       player.Spawn(_spawnPoints[spawnIndex]);
+
+      if (_currentTeam == null || _currentTeam.IsFull)
+      {
+        _currentTeam = new PlayerTeam();
+      }
+
+      PlayerController playerController = player.GetComponent<PlayerController>();
+      if (playerController != null)
+      {
+        _currentTeam.AddPlayer(playerController);
+      }
     }
   }
 }
