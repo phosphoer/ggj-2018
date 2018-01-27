@@ -3,6 +3,12 @@ using System.Collections;
 
 public class Item : MonoBehaviour
 {
+  public enum TransmitTypeEnum
+  {
+    Face,
+    Shape
+  }
+
   public Rigidbody Rigidbody { get { return _rigidBody; } }
   public Collider Collider { get { return _collider; } }
   public Interactable Interactable { get { return _interactable; } }

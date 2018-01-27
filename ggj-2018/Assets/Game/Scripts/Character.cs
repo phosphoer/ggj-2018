@@ -26,6 +26,9 @@ public class Character : MonoBehaviour
   [SerializeField]
   private Vector3 _throwForceLocal = new Vector3(0, 5, 5);
 
+  [SerializeField]
+  private Item.TransmitTypeEnum _transmuteType;
+
   private Vector3 _moveDirection;
   private Vector3 _lastMoveDirection;
   private Item _heldItem;
@@ -66,6 +69,7 @@ public class Character : MonoBehaviour
       _heldItem.transform.SetParent(_heldItemOriginalParent);
       _heldItem.IsBeingHeld = false;
 
+      TransmuteItem(_heldItem);
       targetCharacter.ReceiveItem(_heldItem);
       _heldItem = null;
     }
@@ -99,6 +103,19 @@ public class Character : MonoBehaviour
     {
       Quaternion facingRotation = Quaternion.LookRotation(_lastMoveDirection);
       _rigidBody.rotation = Mathfx.Damp(transform.rotation, facingRotation, 0.5f, Time.deltaTime * 5.0f);
+    }
+  }
+
+  private void TransmuteItem(Item item)
+  {
+    switch (_transmuteType)
+    {
+      case Item.TransmitTypeEnum.Face:
+        item.TransmuteFace();
+        break;
+      case Item.TransmitTypeEnum.Shape:
+        item.TransmuteShape();
+        break;
     }
   }
 }
