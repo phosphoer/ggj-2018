@@ -36,8 +36,60 @@ public class Item : MonoBehaviour
   [SerializeField]
   private Interactable _interactable = null;
 
+  [SerializeField]
+  private GameObject[] _faces = null;
+
+  [SerializeField]
+  private GameObject[] _shapes = null;
+
+  [SerializeField]
+  private Color[] _colors = null;
+
   private bool _isBeingHeld;
   private Coroutine _reEnableRoutine;
+  private int _currentFaceIndex;
+  private int _currentShapeIndex;
+
+  public void TransmuteFace()
+  {
+    _currentFaceIndex = (_currentFaceIndex + 1) % _faces.Length;
+    UpdateVisual();
+  }
+
+  public void TransmuteShape()
+  {
+    _currentShapeIndex = (_currentShapeIndex + 1) % _shapes.Length;
+    UpdateVisual();
+  }
+
+  private void Start()
+  {
+    _currentFaceIndex = Random.Range(0, _faces.Length);
+    _currentShapeIndex = Random.Range(0, _shapes.Length);
+    UpdateVisual();
+  }
+
+  private void UpdateVisual()
+  {
+    foreach (GameObject faceObj in _faces)
+    {
+      faceObj.SetActive(false);
+    }
+
+    foreach (GameObject shapeObj in _shapes)
+    {
+      shapeObj.SetActive(false);
+    }
+
+    _faces[_currentFaceIndex].SetActive(true);
+    _shapes[_currentShapeIndex].SetActive(true);
+
+    Renderer[] renderers = _shapes[_currentShapeIndex].GetComponentsInChildren<Renderer>();
+    foreach (Renderer r in renderers)
+    {
+      r.material.color = _colors[_currentFaceIndex];
+    }
+  }
 
   private IEnumerator ReEnableRoutine()
   {
