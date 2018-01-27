@@ -8,13 +8,20 @@ public class PlayerController : MonoBehaviour
   private Player _player = null;
 
   [SerializeField]
+  private SplitscreenPlayer _splitscreenPlayer = null;
+
+  [SerializeField]
   private PlayerRewiredLink _rewiredLink = null;
 
   [SerializeField]
   private Character[] _characterPrefabs = null;
 
+  [SerializeField]
+  private CameraRig _playerCameraPrefab = null;
+
   private Rewired.Player _rewiredPlayer;
   private Character _character;
+  private CameraRig _cameraRig;
 
   private void Awake()
   {
@@ -41,6 +48,7 @@ public class PlayerController : MonoBehaviour
 
   private void OnPlayerSpawned(Transform spawnPoint)
   {
+    // Remove existing character
     if (_character != null)
     {
       Destroy(_character.gameObject);
@@ -51,5 +59,14 @@ public class PlayerController : MonoBehaviour
     Character characterPrefab = _characterPrefabs[Player.PlayerCount - 1];
     _character = Instantiate(characterPrefab, transform);
     _character.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+
+    // Spawn the camera
+    _cameraRig = Instantiate(_playerCameraPrefab, transform);
+    _cameraRig.transform.position = new Vector3(0, 3, -3);
+    _cameraRig.transform.LookAt(Vector3.zero);
+
+    // Update splitscreen
+    _splitscreenPlayer.PlayerCamera = _cameraRig.Camera;
+    SplitscreenPlayer.UpdateViewports();
   }
 }

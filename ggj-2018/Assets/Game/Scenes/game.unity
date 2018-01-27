@@ -148,8 +148,34 @@ Transform:
   - {fileID: 1912894425}
   - {fileID: 890031345}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &120910598 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1757732928699636, guid: 1684187787d2c44e4b51b0e5e91616d0,
+    type: 2}
+  m_PrefabInternal: {fileID: 585810974}
+--- !u!114 &120910599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 120910598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc490e4457b94ed78896eccc27a4a84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!20 &120910601 stripped
+Camera:
+  m_PrefabParentObject: {fileID: 20520580787228978, guid: 1684187787d2c44e4b51b0e5e91616d0,
+    type: 2}
+  m_PrefabInternal: {fileID: 585810974}
+--- !u!4 &120910602 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4338039458662252, guid: 1684187787d2c44e4b51b0e5e91616d0,
+    type: 2}
+  m_PrefabInternal: {fileID: 585810974}
 --- !u!1001 &395090110
 Prefab:
   m_ObjectHideFlags: 0
@@ -187,7 +213,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4837550350337316, guid: f223cbb0876434f91bf4b2cb321c0987, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f223cbb0876434f91bf4b2cb321c0987, type: 2}
@@ -234,7 +260,7 @@ Transform:
   m_Children:
   - {fileID: 1049274604}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &475675358 stripped
 GameObject:
@@ -427,19 +453,19 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1049274604}
     m_Modifications:
     - target: {fileID: 4338039458662252, guid: 1684187787d2c44e4b51b0e5e91616d0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.036433373
+      value: -0.68108225
       objectReference: {fileID: 0}
     - target: {fileID: 4338039458662252, guid: 1684187787d2c44e4b51b0e5e91616d0, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.0455298
+      value: 2.110546
       objectReference: {fileID: 0}
     - target: {fileID: 4338039458662252, guid: 1684187787d2c44e4b51b0e5e91616d0, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -6.6072154
+      value: -4.6769094
       objectReference: {fileID: 0}
     - target: {fileID: 4338039458662252, guid: 1684187787d2c44e4b51b0e5e91616d0, type: 2}
       propertyPath: m_LocalRotation.x
@@ -461,7 +487,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 4338039458662252, guid: 1684187787d2c44e4b51b0e5e91616d0, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 81382770400249144, guid: 1684187787d2c44e4b51b0e5e91616d0, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 1684187787d2c44e4b51b0e5e91616d0, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &600041980
@@ -685,7 +716,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 120910602}
   m_Father: {fileID: 418839734}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -704,6 +736,7 @@ MonoBehaviour:
   _spawnPoints:
   - {fileID: 600041981}
   - {fileID: 1913179863}
+  _defaultCamera: {fileID: 120910601}
 --- !u!1 &1153438071
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,7 +858,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4303552483201230, guid: 78ef05397baed47e6ac377e77fa1f7b5, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 78ef05397baed47e6ac377e77fa1f7b5, type: 2}
