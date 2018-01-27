@@ -9,9 +9,6 @@ public class GameStateJoin : ActionBase
   [SerializeField]
   private Transform[] _spawnPoints = null;
 
-  [SerializeField]
-  private Camera _defaultCamera = null;
-
   protected override IEnumerator DoActionAsync()
   {
     yield return null;

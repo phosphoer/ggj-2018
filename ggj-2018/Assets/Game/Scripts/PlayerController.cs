@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
   private PlayerRewiredLink _rewiredLink = null;
 
   [SerializeField]
+  private InteractionController _interactionController = null;
+
+  [SerializeField]
   private Character[] _characterPrefabs = null;
 
   [SerializeField]
@@ -33,6 +36,11 @@ public class PlayerController : MonoBehaviour
     _rewiredPlayer = _rewiredLink.RewiredPlayer;
   }
 
+  private void OnDestroy()
+  {
+    _player.Spawned -= OnPlayerSpawned;
+  }
+
   private void Update()
   {
     // Wait for input system 
@@ -41,9 +49,27 @@ public class PlayerController : MonoBehaviour
       return;
     }
 
+    // Move character 
     float axisHorizontal = _rewiredPlayer.GetAxis(InputActions.MoveHorizontal);
     float axisVertical = _rewiredPlayer.GetAxis(InputActions.MoveVertical);
     _character.MoveDirection = new Vector3(axisHorizontal, 0, axisVertical);
+
+    // Try to pick up an interactable if we aren't holding one
+    if (_rewiredPlayer.GetButtonDown(InputActions.PickupDrop))
+    {
+      if (_character.HeldItem != null)
+      {
+        _character.DropItem();
+      }
+      else if (_interactionController.ClosestInteractable != null)
+      {
+        Item item = _interactionController.ClosestInteractable.GetComponent<Item>();
+        if (item != null)
+        {
+          _character.HoldItem(item);
+        }
+      }
+    }
   }
 
   private void OnPlayerSpawned(Transform spawnPoint)
@@ -60,9 +86,12 @@ public class PlayerController : MonoBehaviour
     _character = Instantiate(characterPrefab, transform);
     _character.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
 
+    // Set up interaction controller 
+    _interactionController.TrackedTransform = _character.transform;
+
     // Spawn the camera
     _cameraRig = Instantiate(_playerCameraPrefab, transform);
-    _cameraRig.transform.position = new Vector3(0, 3, -3);
+    _cameraRig.transform.position = new Vector3(0, 4, -10);
     _cameraRig.transform.LookAt(Vector3.zero);
 
     // Update splitscreen

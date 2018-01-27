@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114433134902080488}
   - component: {fileID: 114497529051747414}
   - component: {fileID: 114796797805268458}
+  - component: {fileID: 114632687488382242}
   - component: {fileID: 114394951436054248}
   m_Layer: 0
   m_Name: player
@@ -57,6 +58,7 @@ MonoBehaviour:
   _player: {fileID: 114433134902080488}
   _splitscreenPlayer: {fileID: 114796797805268458}
   _rewiredLink: {fileID: 114497529051747414}
+  _interactionController: {fileID: 114632687488382242}
   _characterPrefabs:
   - {fileID: 114778935340072542, guid: 39528f258cfb44aff8bd5932cb7de011, type: 2}
   - {fileID: 114778935340072542, guid: 5f86d675beb5440e6a62c0dfd7b74e21, type: 2}
@@ -86,6 +88,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RewiredPlayerID: 0
+--- !u!114 &114632687488382242
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1274784545046218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef2e3f657cbdc40bfa11d35793cffa33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _trackedTransform: {fileID: 0}
 --- !u!114 &114796797805268458
 MonoBehaviour:
   m_ObjectHideFlags: 1

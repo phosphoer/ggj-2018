@@ -8,6 +8,12 @@ public class Character : MonoBehaviour
     set { _moveDirection = value.normalized; }
   }
 
+  public Item HeldItem
+  {
+    get { return _heldItem; }
+    set { _heldItem = value; }
+  }
+
   [SerializeField]
   private float _moveSpeed = 1.0f;
 
@@ -15,9 +21,39 @@ public class Character : MonoBehaviour
   private Rigidbody _rigidBody = null;
 
   [SerializeField]
-  private Vector3 _moveDirection;
+  private Transform _heldItemAnchor = null;
 
+  [SerializeField]
+  private Vector3 _throwForceLocal = new Vector3(0, 5, 5);
+
+  private Vector3 _moveDirection;
   private Vector3 _lastMoveDirection;
+  private Item _heldItem;
+  private Transform _heldItemOriginalParent;
+
+  public void HoldItem(Item item)
+  {
+    _heldItemOriginalParent = item.transform.parent;
+
+    _heldItem = item;
+    _heldItem.transform.SetParent(_heldItemAnchor);
+    _heldItem.transform.localPosition = Vector3.zero;
+    _heldItem.transform.localRotation = Quaternion.identity;
+    _heldItem.IsBeingHeld = true;
+  }
+
+  public void DropItem()
+  {
+    if (_heldItem != null)
+    {
+      _heldItem.transform.SetParent(_heldItemOriginalParent);
+      _heldItem.IsBeingHeld = false;
+
+      Vector3 throwForce = transform.TransformDirection(_throwForceLocal);
+      _heldItem.Rigidbody.AddForce(throwForce, ForceMode.Impulse);
+      _heldItem = null;
+    }
+  }
 
   private void Update()
   {
