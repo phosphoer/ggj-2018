@@ -65,6 +65,7 @@ public class Character : MonoBehaviour
     {
       _heldItem.transform.SetParent(_heldItemOriginalParent);
       _heldItem.IsBeingHeld = false;
+
       targetCharacter.ReceiveItem(_heldItem);
       _heldItem = null;
     }

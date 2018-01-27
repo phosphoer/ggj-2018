@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
   public PlayerTeam PlayerTeam { get; set; }
   public Character Character { get { return _character; } }
+  public CameraRig CameraRig { get { return _cameraRig; } }
 
   [SerializeField]
   private Player _player = null;
@@ -24,6 +25,12 @@ public class PlayerController : MonoBehaviour
 
   [SerializeField]
   private CameraRig _playerCameraPrefab = null;
+
+  [SerializeField]
+  private float _transmitScreenShakeDuration = 0.25f;
+
+  [SerializeField]
+  private float _transmitScreenShakeMagnitude = 0.1f;
 
   private Rewired.Player _rewiredPlayer;
   private Character _character;
@@ -81,6 +88,7 @@ public class PlayerController : MonoBehaviour
       if (targetPlayer != null)
       {
         _character.TransmitItem(targetPlayer.Character);
+        targetPlayer.CameraRig.Shake(_transmitScreenShakeDuration, _transmitScreenShakeMagnitude);
       }
       else
       {

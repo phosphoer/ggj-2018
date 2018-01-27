@@ -64,6 +64,8 @@ MonoBehaviour:
   - {fileID: 114778935340072542, guid: 5f86d675beb5440e6a62c0dfd7b74e21, type: 2}
   _playerCameraPrefab: {fileID: 114633141577072870, guid: 44b4194afe3214a25a1c51f125740fa1,
     type: 2}
+  _transmitScreenShakeDuration: 0.3
+  _transmitScreenShakeMagnitude: 0.5
 --- !u!114 &114433134902080488
 MonoBehaviour:
   m_ObjectHideFlags: 1

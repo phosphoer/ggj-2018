@@ -11,6 +11,17 @@ public class CameraRig : MonoBehaviour
   [SerializeField]
   private Vector3 _cameraOffset = new Vector3(0, 4, -10);
 
+  private float _shakeTimer;
+  private float _shakeTime;
+  private float _shakeMagnitude;
+
+  public void Shake(float duration, float magnitude)
+  {
+    _shakeTime = duration;
+    _shakeTimer = duration;
+    _shakeMagnitude = magnitude;
+  }
+
   private void Update()
   {
     if (TrackedTransform != null)
@@ -24,6 +35,13 @@ public class CameraRig : MonoBehaviour
       {
         transform.position = desiredPos;
       }
+    }
+
+    _shakeTimer -= Time.deltaTime;
+    if (_shakeTimer > 0)
+    {
+      float shakeT = Mathf.Clamp01(_shakeTimer / _shakeTime);
+      transform.position += Random.onUnitSphere * Random.value * _shakeMagnitude * shakeT;
     }
 
     Quaternion desiredRotation = Quaternion.LookRotation((TrackedTransform.position - _camera.transform.position).normalized);
