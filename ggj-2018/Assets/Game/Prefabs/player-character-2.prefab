@@ -156,3 +156,4 @@ MonoBehaviour:
   _rigidBody: {fileID: 54073025398787208}
   _heldItemAnchor: {fileID: 4912480445132162}
   _throwForceLocal: {x: 0, y: 20, z: 10}
+  _transmuteType: 1
