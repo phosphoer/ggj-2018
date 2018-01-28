@@ -1,18 +1,21 @@
 fileFormatVersion: 2
-guid: 43ec4d9827f623d4781669653d56f10c
-timeCreated: 1517075647
+guid: 379f8728fcd6597458388fb801f2d083
+timeCreated: 1517139451
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Blood
     400000: //RootNode
-    2100000: lambert3
-    2100002: lambert8
-    2100004: lambert2
+    400002: Blood
+    2100000: lambert2
     2300000: //RootNode
+    2300002: Blood
     3300000: //RootNode
-    4300000: Gem
+    3300002: Blood
+    4300000: Bowl1
+    4300002: Blood
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -63,7 +66,7 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 1
+    useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0

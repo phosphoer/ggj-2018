@@ -1,18 +1,16 @@
 fileFormatVersion: 2
-guid: 43ec4d9827f623d4781669653d56f10c
-timeCreated: 1517075647
+guid: 27f6a85ad23e2b740913c381d941ab66
+timeCreated: 1517142373
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: lambert3
-    2100002: lambert8
-    2100004: lambert2
+    2100000: ggj_gradient
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Gem
+    4300000: polySurface1
     9500000: //RootNode
   externalObjects: {}
   materials:
