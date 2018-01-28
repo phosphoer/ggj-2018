@@ -91,13 +91,17 @@ public class PlayerController : MonoBehaviour
       if (targetPlayer != null)
       {
         _character.TransmitItem(targetPlayer.Character);
-        targetPlayer.CameraRig.Shake(_transmitScreenShakeDuration, _transmitScreenShakeMagnitude);
       }
       else
       {
         Debug.LogError("Tried to transmit an item but no second player");
       }
     }
+  }
+
+  private void OnCharacterVomited()
+  {
+    _cameraRig.Shake(_transmitScreenShakeDuration, _transmitScreenShakeMagnitude);
   }
 
   private void OnPlayerSpawned(Transform spawnPoint)
@@ -113,6 +117,7 @@ public class PlayerController : MonoBehaviour
     Character characterPrefab = _characterPrefabs[Player.PlayerCount - 1];
     _character = Instantiate(characterPrefab, transform);
     _character.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+    _character.ItemVomited += OnCharacterVomited;
 
     // Set up interaction controller 
     _interactionController.TrackedTransform = _character.transform;

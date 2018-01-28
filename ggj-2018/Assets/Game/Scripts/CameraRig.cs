@@ -14,6 +14,7 @@ public class CameraRig : MonoBehaviour
   private float _shakeTimer;
   private float _shakeTime;
   private float _shakeMagnitude;
+  private bool _interpolating = true;
 
   public void Shake(float duration, float magnitude)
   {
@@ -27,7 +28,12 @@ public class CameraRig : MonoBehaviour
     if (TrackedTransform != null)
     {
       Vector3 desiredPos = TrackedTransform.position + _cameraOffset;
-      if (Vector3.Distance(transform.position, desiredPos) > 0.1f)
+      if (Vector3.Distance(transform.position, desiredPos) < 0.1f)
+      {
+        _interpolating = false;
+      }
+
+      if (_interpolating)
       {
         transform.position = Mathfx.Damp(transform.position, desiredPos, 0.5f, Time.deltaTime * 5.0f);
       }
