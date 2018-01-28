@@ -77,6 +77,9 @@ public class Maw : MonoBehaviour
   [SerializeField]
   private GameObject _speechXIcon = null;
 
+  [SerializeField]
+  private SkullLightController _skullAltar = null;
+
   private int _mistakeCount;
   private int _correctCount;
   private Dictionary<PlayerController, Item.ItemDefinition> _desiredItems;
@@ -241,6 +244,8 @@ public class Maw : MonoBehaviour
     AudioManager.Instance.PlaySound(_eatSound);
     PickNewDesiredItem(byPlayer);
     ++_correctCount;
+
+    _skullAltar.EnableNext();
   }
 
   private void IncorrectChoiceMade(PlayerController byPlayer)
@@ -276,8 +281,8 @@ public class Maw : MonoBehaviour
   private void PickNewDesiredItem(PlayerController forPlayer)
   {
     Item.ItemDefinition desiredItem;
-    desiredItem.FaceIndex = Random.Range(0, _itemPrefab.TypeCount);
-    desiredItem.ShapeIndex = Random.Range(0, _itemPrefab.TypeCount);
+    desiredItem.FaceIndex = _faceIndicesThisGame[Random.Range(0, _faceIndicesThisGame.Count)];
+    desiredItem.ShapeIndex = _shapeIndicesThisGame[Random.Range(0, _shapeIndicesThisGame.Count)];
 
     _desiredItems[forPlayer] = desiredItem;
 
