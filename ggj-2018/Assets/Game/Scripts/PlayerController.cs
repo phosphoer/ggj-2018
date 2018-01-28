@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Spawn the appropriate character based on which player we are
-    Character characterPrefab = _characterPrefabs[Player.PlayerCount - 1];
+    Character characterPrefab = _characterPrefabs[Player.GetPlayerIndex(_player)];
     _character = Instantiate(characterPrefab, transform);
     _character.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
     _character.ItemVomited += OnCharacterVomited;
@@ -135,6 +135,7 @@ public class PlayerController : MonoBehaviour
     // Spawn the camera
     _cameraRig = Instantiate(_playerCameraPrefab, transform);
     _cameraRig.TrackedTransform = _character.transform;
+    _cameraRig.Camera.cullingMask |= 1 << LayerMask.NameToLayer(_player.ExclusiveLayerName);
 
     if (Camera.main != null)
     {

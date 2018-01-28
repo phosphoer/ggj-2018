@@ -13,6 +13,19 @@ public class Player : MonoBehaviour
     return _sPlayersJoined[index];
   }
 
+  public static int GetPlayerIndex(Player player)
+  {
+    for (int i = 0; i < _sPlayersJoined.Count; ++i)
+    {
+      if (_sPlayersJoined[i] == player)
+      {
+        return i;
+      }
+    }
+
+    return -1;
+  }
+
   public static int PlayerCount { get { return _sPlayersJoined.Count; } }
 
   public Transform SpawnPoint { get { return _lastSpawnPoint; } }
@@ -61,10 +74,10 @@ public class Player : MonoBehaviour
   {
     if (!_sPlayersJoined.Contains(this))
     {
-      _sPlayersJoined.Add(this);
-
       if (string.IsNullOrEmpty(ExclusiveLayerName))
         ExclusiveLayerName = string.Format("Player{0}", _sPlayersJoined.Count);
+
+      _sPlayersJoined.Add(this);
 
       if (PlayerJoined != null)
         PlayerJoined(this);
