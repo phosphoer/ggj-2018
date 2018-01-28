@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-  public event System.Action ItemVomited;
+  public event System.Action<Item> ItemVomited;
 
   public Vector3 MoveDirection
   {
@@ -232,7 +232,9 @@ public class Character : MonoBehaviour
 
     if (ItemVomited != null)
     {
-      ItemVomited();
+      ItemVomited(_pendingItemVomit);
     }
+
+    _pendingItemVomit = null;
   }
 }

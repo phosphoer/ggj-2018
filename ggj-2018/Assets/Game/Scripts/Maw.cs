@@ -6,6 +6,14 @@ public class Maw : MonoBehaviour
   [SerializeField]
   private Item _itemPrefab = null;
 
+  [SerializeField]
+  private int _losingMistakeCount = 5;
+
+  [SerializeField]
+  private int _winningCorrectCount = 5;
+
+  private int _mistakeCount;
+  private int _correctCount;
   private Dictionary<PlayerController, Item.ItemDefinition> _desiredItems;
 
   private void Awake()
@@ -23,19 +31,39 @@ public class Maw : MonoBehaviour
       // If this is the item we wanted from this player
       if (IsCorrectItem(item, item.OwnedByPlayer))
       {
-        PickNewDesiredItem(item.OwnedByPlayer);
+        CorrectChoiceMade(item.OwnedByPlayer);
       }
       // Otherwise we should get mad 
       else
       {
-
+        IncorrectChoiceMade(item.OwnedByPlayer);
       }
+
+      Destroy(item.gameObject);
     }
+
+    CheckWinLose();
   }
 
   private void OnPlayerSpawned(PlayerController playerController)
   {
     PickNewDesiredItem(playerController);
+  }
+
+  private void CorrectChoiceMade(PlayerController byPlayer)
+  {
+    PickNewDesiredItem(byPlayer);
+    ++_correctCount;
+  }
+
+  private void IncorrectChoiceMade(PlayerController byPlayer)
+  {
+    ++_mistakeCount;
+
+    foreach (PlayerController playerController in _desiredItems.Keys)
+    {
+      playerController.CameraRig.Shake(2.0f, 0.5f);
+    }
   }
 
   private bool IsCorrectItem(Item item, PlayerController forPlayer)
@@ -47,6 +75,11 @@ public class Maw : MonoBehaviour
     }
 
     return false;
+  }
+
+  private void CheckWinLose()
+  {
+
   }
 
   private void PickNewDesiredItem(PlayerController forPlayer)

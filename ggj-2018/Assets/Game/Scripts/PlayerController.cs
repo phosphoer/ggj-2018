@@ -99,8 +99,9 @@ public class PlayerController : MonoBehaviour
     }
   }
 
-  private void OnCharacterVomited()
+  private void OnCharacterVomited(Item item)
   {
+    item.OwnedByPlayer = this;
     _cameraRig.Shake(_transmitScreenShakeDuration, _transmitScreenShakeMagnitude);
   }
 
