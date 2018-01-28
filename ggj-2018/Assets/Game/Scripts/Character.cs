@@ -156,6 +156,14 @@ public class Character : MonoBehaviour
       moveVector = Vector3.zero;
     }
 
+    if (_pendingTransmitCharacter != null)
+    {
+      if (_heldItem != null)
+      {
+        _heldItem.transform.localScale = Mathfx.Damp(_heldItem.transform.localScale, Vector3.zero, 0.5f, Time.deltaTime * 1.0f);
+      }
+    }
+
     bool isWalking = moveVector.sqrMagnitude > 0;
     if (isWalking)
     {
@@ -272,6 +280,7 @@ public class Character : MonoBehaviour
       _pendingItemVomit.gameObject.SetActive(true);
       _pendingItemVomit.IsBeingHeld = false;
       _pendingItemVomit.Rigidbody.AddForce(throwForce, ForceMode.Impulse);
+      _pendingItemVomit.transform.localScale = Vector3.one;
 
       if (_barfSound != null)
       {
@@ -286,5 +295,6 @@ public class Character : MonoBehaviour
 
     _itemIsInUse = false;
     _pendingItemVomit = null;
+    _pendingTransmitCharacter = null;
   }
 }
