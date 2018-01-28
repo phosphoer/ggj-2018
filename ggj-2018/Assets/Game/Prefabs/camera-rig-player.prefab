@@ -130,4 +130,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 20372358148442714}
-  _cameraOffset: {x: 0, y: 6, z: -4}
+  _cameraOffset: {x: 0, y: 5, z: -5}

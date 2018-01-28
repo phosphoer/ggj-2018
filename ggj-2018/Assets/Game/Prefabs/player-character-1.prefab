@@ -992,7 +992,7 @@ GameObject:
   - component: {fileID: 4094275258030556}
   - component: {fileID: 114778935340072542}
   - component: {fileID: 54073025398787208}
-  - component: {fileID: 65524013912979814}
+  - component: {fileID: 135444747741425728}
   m_Layer: 0
   m_Name: player-character-1
   m_TagString: Untagged
@@ -1392,7 +1392,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1759881832819954}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2.128}
+  m_LocalPosition: {x: -9.41, y: 0.146, z: -7.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4416746519464120}
@@ -2523,18 +2523,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &65524013912979814
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1759881832819954}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.5, z: 1}
-  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!95 &95772340520432914
 Animator:
   serializedVersion: 3
@@ -2582,6 +2570,18 @@ MonoBehaviour:
   _throwForceLocal: {x: 0, y: 20, z: 10}
   _characterAnimator: {fileID: 114176250689009102}
   _transmuteType: 0
+--- !u!135 &135444747741425728
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1759881832819954}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.75
+  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!137 &137792371269575120
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

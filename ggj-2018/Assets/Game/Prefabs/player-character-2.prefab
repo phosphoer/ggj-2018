@@ -718,7 +718,7 @@ GameObject:
   - component: {fileID: 4074235857552068}
   - component: {fileID: 114834935459813678}
   - component: {fileID: 54798165417054640}
-  - component: {fileID: 65388137382239796}
+  - component: {fileID: 135267010015530312}
   m_Layer: 0
   m_Name: player-character-2
   m_TagString: Untagged
@@ -1274,7 +1274,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1601030583511812}
   m_LocalRotation: {x: -0, y: 0.99388164, z: -0, w: 0.11045074}
-  m_LocalPosition: {x: 1.24, y: 0, z: -2.09}
+  m_LocalPosition: {x: -10.1, y: 0.071, z: -5.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4481491467604340}
@@ -1780,7 +1780,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1142149583696968}
-  m_LocalRotation: {x: 0.6571418, y: 0.26108357, z: 0.60938334, w: -0.3586808}
+  m_LocalRotation: {x: 0.65714186, y: 0.2610836, z: 0.6093834, w: -0.35868084}
   m_LocalPosition: {x: 11.6152725, y: -0.37773308, z: 29.3421}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2523,18 +2523,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &65388137382239796
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1601030583511812}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.5, z: 1}
-  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!95 &95325286907286206
 Animator:
   serializedVersion: 3
@@ -2582,6 +2570,18 @@ MonoBehaviour:
   _throwForceLocal: {x: 0, y: 20, z: 10}
   _characterAnimator: {fileID: 114576627301828482}
   _transmuteType: 1
+--- !u!135 &135267010015530312
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1601030583511812}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.75
+  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!137 &137357272739034238
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
