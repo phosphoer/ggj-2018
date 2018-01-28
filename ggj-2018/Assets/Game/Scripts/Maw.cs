@@ -56,14 +56,29 @@ public class Maw : MonoBehaviour
   [SerializeField]
   private SoundBank _talkSound = null;
 
+  [SerializeField]
+  private int _typeCountPerGame = 3;
+
+  [SerializeField]
+  private int _creatureCount = 50;
+
+  [SerializeField]
+  private Transform[] _leftSpawnPoints = null;
+
+  [SerializeField]
+  private Transform[] _rightSpawnPoints = null;
+
   private int _mistakeCount;
   private int _correctCount;
   private Dictionary<PlayerController, Item.ItemDefinition> _desiredItems;
+  private List<int> _faceIndicesThisGame = new List<int>();
+  private List<int> _shapeIndicesThisGame = new List<int>();
   private float _eyeBlinkTimer;
   private Vector3 _eyeOriginalScale;
   private float _eyeBlinkScale = 1.0f;
   private float _eyeOpenScale = 1.0f;
   private bool _isOpen;
+  private float _spawnTimer;
 
   private void Awake()
   {
@@ -73,9 +88,28 @@ public class Maw : MonoBehaviour
     _interactable.PromptHidden += OnPromptHidden;
     PlayerController.Spawned += OnPlayerSpawned;
 
+    // Pick which types will be in this game
+    List<int> faceIndices = new List<int>();
+    List<int> shapeIndices = new List<int>();
+    for (int i = 0; i < _itemPrefab.TypeCount; ++i)
+    {
+      faceIndices.Add(i);
+      shapeIndices.Add(i);
+    }
+
+    for (int i = 0; i < _typeCountPerGame; ++i)
+    {
+      int chosenFaceIndex = faceIndices[Random.Range(0, faceIndices.Count)];
+      int chosenShapeIndex = shapeIndices[Random.Range(0, shapeIndices.Count)];
+      _faceIndicesThisGame.Add(chosenFaceIndex);
+      _shapeIndicesThisGame.Add(chosenShapeIndex);
+      faceIndices.Remove(chosenFaceIndex);
+      shapeIndices.Remove(chosenShapeIndex);
+    }
+
     foreach (GameObject victoryTorch in _victoryTorches)
     {
-      victoryTorch.transform.localScale = Vector3.zero;
+      victoryTorch.transform.localScale = Vector3.one;
     }
   }
 
@@ -98,8 +132,28 @@ public class Maw : MonoBehaviour
     for (int i = 0; i < _victoryTorches.Length; ++i)
     {
       GameObject victoryTorch = _victoryTorches[i];
-      bool isLit = _correctCount > i;
+      bool isLit = _mistakeCount <= i;
       victoryTorch.transform.localScale = Mathfx.Damp(victoryTorch.transform.localScale, isLit ? Vector3.one : Vector3.zero, 0.5f, Time.deltaTime);
+    }
+
+    // Spawn creatures 
+    _spawnTimer -= Time.deltaTime;
+    if (_spawnTimer < 0 && Item.InstanceCount < _creatureCount)
+    {
+      _spawnTimer = 5.0f;
+
+      Item.ItemDefinition itemDef = new Item.ItemDefinition();
+      itemDef.FaceIndex = _faceIndicesThisGame[Random.Range(0, _faceIndicesThisGame.Count)];
+      itemDef.ShapeIndex = _shapeIndicesThisGame[Random.Range(0, _shapeIndicesThisGame.Count)];
+
+      Item creature = Instantiate(_itemPrefab);
+      creature.Definition = itemDef;
+
+      Transform spawnPoint = Random.value > 0.5f ?
+        _leftSpawnPoints[Random.Range(0, _leftSpawnPoints.Length)] :
+        _rightSpawnPoints[Random.Range(0, _rightSpawnPoints.Length)];
+
+      creature.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
     }
   }
 
