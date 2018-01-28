@@ -2570,6 +2570,7 @@ MonoBehaviour:
   _throwForceLocal: {x: 0, y: 20, z: 10}
   _characterAnimator: {fileID: 114576627301828482}
   _transmuteType: 1
+  _barfSound: {fileID: 11400000, guid: a591dd079326544cc9cc07fd44e0f1fc, type: 2}
 --- !u!135 &135267010015530312
 SphereCollider:
   m_ObjectHideFlags: 1

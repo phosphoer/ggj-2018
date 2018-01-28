@@ -39,6 +39,9 @@ public class Character : MonoBehaviour
   [SerializeField]
   private Item.TransmitTypeEnum _transmuteType;
 
+  [SerializeField]
+  private SoundBank _barfSound = null;
+
   private Vector3 _moveDirection;
   private Vector3 _lastMoveDirection;
   private Item _heldItem;
@@ -232,6 +235,11 @@ public class Character : MonoBehaviour
       _pendingItemVomit.gameObject.SetActive(true);
       _pendingItemVomit.IsBeingHeld = false;
       _pendingItemVomit.Rigidbody.AddForce(throwForce, ForceMode.Impulse);
+
+      if (_barfSound != null)
+      {
+        AudioManager.Instance.PlaySound(_barfSound);
+      }
 
       if (ItemVomited != null)
       {
