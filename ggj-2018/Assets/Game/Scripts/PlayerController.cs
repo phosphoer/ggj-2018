@@ -4,6 +4,12 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
+  public static event System.Action<PlayerController> Spawned;
+
+  public PlayerTeam PlayerTeam { get; set; }
+  public Character Character { get { return _character; } }
+  public CameraRig CameraRig { get { return _cameraRig; } }
+
   [SerializeField]
   private Player _player = null;
 
@@ -14,10 +20,19 @@ public class PlayerController : MonoBehaviour
   private PlayerRewiredLink _rewiredLink = null;
 
   [SerializeField]
+  private InteractionController _interactionController = null;
+
+  [SerializeField]
   private Character[] _characterPrefabs = null;
 
   [SerializeField]
   private CameraRig _playerCameraPrefab = null;
+
+  [SerializeField]
+  private float _transmitScreenShakeDuration = 0.25f;
+
+  [SerializeField]
+  private float _transmitScreenShakeMagnitude = 0.1f;
 
   private Rewired.Player _rewiredPlayer;
   private Character _character;
@@ -33,6 +48,11 @@ public class PlayerController : MonoBehaviour
     _rewiredPlayer = _rewiredLink.RewiredPlayer;
   }
 
+  private void OnDestroy()
+  {
+    _player.Spawned -= OnPlayerSpawned;
+  }
+
   private void Update()
   {
     // Wait for input system 
@@ -41,9 +61,48 @@ public class PlayerController : MonoBehaviour
       return;
     }
 
+    // Move character 
     float axisHorizontal = _rewiredPlayer.GetAxis(InputActions.MoveHorizontal);
     float axisVertical = _rewiredPlayer.GetAxis(InputActions.MoveVertical);
     _character.MoveDirection = new Vector3(axisHorizontal, 0, axisVertical);
+
+    // Try to pick up an interactable if we aren't holding one
+    if (_rewiredPlayer.GetButtonDown(InputActions.PickupDrop))
+    {
+      if (_character.HeldItem != null)
+      {
+        _character.DropItem();
+      }
+      else if (_interactionController.ClosestInteractable != null)
+      {
+        Item item = _interactionController.ClosestInteractable.GetComponent<Item>();
+        if (item != null)
+        {
+          item.OwnedByPlayer = this;
+          _character.HoldItem(item);
+        }
+      }
+    }
+
+    // Transmit an item if we have one and the button is pressed
+    if (_character.HeldItem != null && _rewiredPlayer.GetButtonDown(InputActions.Transmit))
+    {
+      PlayerController targetPlayer = PlayerTeam.GetOtherPlayer(this);
+      if (targetPlayer != null)
+      {
+        _character.TransmitItem(targetPlayer.Character);
+      }
+      else
+      {
+        Debug.LogError("Tried to transmit an item but no second player");
+      }
+    }
+  }
+
+  private void OnCharacterVomited(Item item)
+  {
+    item.OwnedByPlayer = this;
+    _cameraRig.Shake(_transmitScreenShakeDuration, _transmitScreenShakeMagnitude);
   }
 
   private void OnPlayerSpawned(Transform spawnPoint)
@@ -59,14 +118,32 @@ public class PlayerController : MonoBehaviour
     Character characterPrefab = _characterPrefabs[Player.PlayerCount - 1];
     _character = Instantiate(characterPrefab, transform);
     _character.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+    _character.ItemVomited += OnCharacterVomited;
+
+    // Set up interaction controller 
+    _interactionController.TrackedTransform = _character.transform;
 
     // Spawn the camera
     _cameraRig = Instantiate(_playerCameraPrefab, transform);
-    _cameraRig.transform.position = new Vector3(0, 3, -3);
-    _cameraRig.transform.LookAt(Vector3.zero);
+    _cameraRig.TrackedTransform = _character.transform;
+
+    if (Camera.main != null)
+    {
+      _cameraRig.transform.SetPositionAndRotation(Camera.main.transform.position, Camera.main.transform.rotation);
+    }
+    else
+    {
+      _cameraRig.transform.position = new Vector3(0, 4, -10);
+      _cameraRig.transform.LookAt(Vector3.zero);
+    }
 
     // Update splitscreen
     _splitscreenPlayer.PlayerCamera = _cameraRig.Camera;
     SplitscreenPlayer.UpdateViewports();
+
+    if (Spawned != null)
+    {
+      Spawned(this);
+    }
   }
 }
