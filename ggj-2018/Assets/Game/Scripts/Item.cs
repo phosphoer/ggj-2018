@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Item : MonoBehaviour
 {
+  public static int InstanceCount { get; private set; }
+
   public event System.Action IsHeldChanged;
 
   public enum TransmitTypeEnum
@@ -24,6 +26,12 @@ public class Item : MonoBehaviour
   public ItemDefinition Definition
   {
     get { return new ItemDefinition() { FaceIndex = _currentFaceIndex, ShapeIndex = _currentShapeIndex }; }
+    set
+    {
+      _currentFaceIndex = value.FaceIndex;
+      _currentShapeIndex = value.ShapeIndex;
+      UpdateVisual();
+    }
   }
 
   public PlayerController OwnedByPlayer { get; set; }
@@ -87,11 +95,23 @@ public class Item : MonoBehaviour
     UpdateVisual();
   }
 
-  private void Start()
+  public void Randomize()
   {
     _currentFaceIndex = Random.Range(0, _faces.Length);
     _currentShapeIndex = Random.Range(0, _shapes.Length);
+  }
+
+  private void Start()
+  {
+    Randomize();
     UpdateVisual();
+
+    ++InstanceCount;
+  }
+
+  private void OnDestroy()
+  {
+    --InstanceCount;
   }
 
   private void UpdateVisual()

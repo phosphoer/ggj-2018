@@ -2341,7 +2341,7 @@ MonoBehaviour:
   _interactable: {fileID: 114538865580959704}
   _animator: {fileID: 95274471775249794}
   _eyesTransform: {fileID: 4871655490794450}
-  _itemPrefab: {fileID: 114781045659967942, guid: afe82bb7f0f5d4786bb881316166a994,
+  _itemPrefab: {fileID: 114033923226677198, guid: 11889dc5fd7a74da79451b0557c082ba,
     type: 2}
   _losingMistakeCount: 5
   _winningCorrectCount: 5
@@ -2381,6 +2381,20 @@ MonoBehaviour:
   _angrySound: {fileID: 11400000, guid: fec7ad7bb47964c7ba6760964571144f, type: 2}
   _eatSound: {fileID: 11400000, guid: a241f8322474d4b3e980275ec12610ca, type: 2}
   _talkSound: {fileID: 11400000, guid: df438cae2906c4c1c8cc6abbf309c1a2, type: 2}
+  _typeCountPerGame: 3
+  _creatureCount: 50
+  _leftSpawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _rightSpawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &114538865580959704
 MonoBehaviour:
   m_ObjectHideFlags: 1
