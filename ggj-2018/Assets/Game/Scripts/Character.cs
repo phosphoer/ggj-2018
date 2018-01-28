@@ -16,6 +16,8 @@ public class Character : MonoBehaviour
     set { _heldItem = value; }
   }
 
+  public bool IsBusy { get { return _itemIsInUse; } }
+
   [SerializeField]
   private float _moveSpeed = 1.0f;
 
@@ -43,29 +45,35 @@ public class Character : MonoBehaviour
   private Item _pendingItemPickup;
   private Item _pendingItemVomit;
   private Character _pendingTransmitCharacter;
+  private bool _itemIsInUse;
   private Transform _heldItemOriginalParent;
 
   public void HoldItem(Item item)
   {
-    _heldItemOriginalParent = item.transform.parent;
-    _pendingItemPickup = item;
-    item.IsBeingHeld = true;
+    if (_heldItem == null && !_itemIsInUse)
+    {
+      _heldItemOriginalParent = item.transform.parent;
+      _pendingItemPickup = item;
+      _itemIsInUse = true;
+      item.IsBeingHeld = true;
 
-    if (_characterAnimator != null)
-    {
-      _characterAnimator.ItemPickedUp += OnAnimationItemPickedUp;
-      _characterAnimator.PickUp();
-    }
-    else
-    {
-      OnAnimationItemPickedUp();
+      if (_characterAnimator != null)
+      {
+        _characterAnimator.ItemPickedUp += OnAnimationItemPickedUp;
+        _characterAnimator.PickUp();
+      }
+      else
+      {
+        OnAnimationItemPickedUp();
+      }
     }
   }
 
   public void DropItem()
   {
-    if (_heldItem != null)
+    if (_heldItem != null && !_itemIsInUse)
     {
+      _itemIsInUse = true;
       if (_characterAnimator != null)
       {
         _characterAnimator.ItemThrown += OnAnimationItemThrown;
@@ -76,16 +84,13 @@ public class Character : MonoBehaviour
         OnAnimationItemThrown();
       }
     }
-    else
-    {
-      Debug.LogError("Tried to drop an item but not holding anything");
-    }
   }
 
   public void TransmitItem(Character targetCharacter)
   {
-    if (_heldItem != null)
+    if (_heldItem != null && !_itemIsInUse)
     {
+      _itemIsInUse = true;
       _pendingTransmitCharacter = targetCharacter;
 
       if (_characterAnimator != null)
@@ -97,10 +102,6 @@ public class Character : MonoBehaviour
       {
         OnAnimationItemEaten();
       }
-    }
-    else
-    {
-      Debug.LogError("Tried to transmit an item but not holding anything");
     }
   }
 
@@ -123,6 +124,11 @@ public class Character : MonoBehaviour
   {
     Vector3 moveVector = MoveDirection * _moveSpeed * Time.deltaTime;
     moveVector.y = 0;
+
+    if (IsBusy)
+    {
+      moveVector = Vector3.zero;
+    }
 
     bool isWalking = moveVector.sqrMagnitude > 0;
     if (isWalking)
@@ -167,6 +173,7 @@ public class Character : MonoBehaviour
 
     _heldItem.transform.SetParent(_heldItemOriginalParent);
     _heldItem.IsBeingHeld = false;
+    _itemIsInUse = false;
 
     Vector3 throwForce = transform.TransformDirection(_throwForceLocal);
     _heldItem.Rigidbody.AddForce(throwForce, ForceMode.Impulse);
@@ -185,6 +192,7 @@ public class Character : MonoBehaviour
     _heldItem.transform.SetParent(_heldItemAnchor);
     _heldItem.transform.localPosition = Vector3.zero;
     _heldItem.transform.localRotation = Quaternion.identity;
+    _itemIsInUse = false;
 
     _pendingItemPickup = null;
   }
@@ -203,6 +211,7 @@ public class Character : MonoBehaviour
     TransmuteItem(_heldItem);
     _pendingTransmitCharacter.ReceiveItem(_heldItem);
     _heldItem = null;
+    _itemIsInUse = false;
 
     _pendingTransmitCharacter = null;
   }
