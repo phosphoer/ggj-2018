@@ -99,6 +99,7 @@ public class Item : MonoBehaviour
   {
     _currentFaceIndex = Random.Range(0, _faces.Length);
     _currentShapeIndex = Random.Range(0, _shapes.Length);
+    UpdateVisual();
   }
 
   private void Start()
