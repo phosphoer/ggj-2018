@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 200dcdc2f387a47cab1b461062e1b64d, type: 3}
-  m_Name: new-sound-bank
+  m_Name: sound-maw-open
   m_EditorClassIdentifier: 
   AudioClips: []
   IsSpatial: 0
