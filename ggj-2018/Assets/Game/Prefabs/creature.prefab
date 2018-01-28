@@ -1275,7 +1275,7 @@ MonoBehaviour:
   _interactionUIAnchor: {fileID: 4242604984411958}
   _interactionUIHeight: 0
   _interactionText: Pick Up
-  _interactionRadius: 2.5
+  _interactionRadius: 3
 --- !u!114 &114380758166861456
 MonoBehaviour:
   m_ObjectHideFlags: 1
