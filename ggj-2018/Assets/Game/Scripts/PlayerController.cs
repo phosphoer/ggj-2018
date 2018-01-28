@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
   public static event System.Action<PlayerController> Spawned;
 
   public PlayerTeam PlayerTeam { get; set; }
+  public Player Player { get { return _player; } }
   public Character Character { get { return _character; } }
   public CameraRig CameraRig { get { return _cameraRig; } }
 
