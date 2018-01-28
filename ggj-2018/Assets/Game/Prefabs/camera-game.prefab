@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 20520580787228978}
   - component: {fileID: 81382770400249144}
   - component: {fileID: 114956778867788872}
+  - component: {fileID: 45840400087330550}
   m_Layer: 0
   m_Name: camera-game
   m_TagString: MainCamera
@@ -50,7 +51,7 @@ Camera:
   m_GameObject: {fileID: 1757732928699636}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.37494597, g: 0.4646593, b: 0.53676474, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -58,8 +59,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
+  near clip plane: 1
+  far clip plane: 100
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -78,6 +79,14 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!45 &45840400087330550
+Skybox:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1757732928699636}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: 169a1b8f06c17c84e8de491f2bfef986, type: 2}
 --- !u!81 &81382770400249144
 AudioListener:
   m_ObjectHideFlags: 1

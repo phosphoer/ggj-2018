@@ -3,16 +3,30 @@ using System.Collections;
 
 public class Item : MonoBehaviour
 {
+  public event System.Action IsHeldChanged;
+
   public enum TransmitTypeEnum
   {
     Face,
     Shape
   }
 
+  public struct ItemDefinition
+  {
+    public int FaceIndex;
+    public int ShapeIndex;
+  }
+
   public Rigidbody Rigidbody { get { return _rigidBody; } }
   public Collider Collider { get { return _collider; } }
   public Interactable Interactable { get { return _interactable; } }
+  public int TypeCount { get { return _faces.Length; } }
+  public ItemDefinition Definition
+  {
+    get { return new ItemDefinition() { FaceIndex = _currentFaceIndex, ShapeIndex = _currentShapeIndex }; }
+  }
 
+  public PlayerController OwnedByPlayer { get; set; }
   public bool IsBeingHeld
   {
     get { return _isBeingHeld; }
@@ -29,6 +43,11 @@ public class Item : MonoBehaviour
       else if (_reEnableRoutine == null)
       {
         StartCoroutine(ReEnableRoutine());
+      }
+
+      if (IsHeldChanged != null)
+      {
+        IsHeldChanged();
       }
     }
   }

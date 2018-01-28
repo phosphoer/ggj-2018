@@ -1,0 +1,8 @@
+0 - Base pose
+1-24 - Walk
+25-48 - Carry Walk
+49-98 - Eat
+99-123 - Drop/Throw
+124-148 - Pickup
+149-197 - Idle
+198 - 222 - Vom

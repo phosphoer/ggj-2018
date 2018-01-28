@@ -1,0 +1,144 @@
+fileFormatVersion: 2
+guid: 27cc312d07be142e4a262eefe5be2376
+timeCreated: 1511847917
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: flora-grass-tall
+    100004: flora-grass-tall-more
+    100006: flora-grass-single
+    100008: flora-bush-01
+    100010: flora-bush-02
+    100012: flora-cactus-aloe-1
+    100014: flora-cactus-aloe-2
+    100016: flora-tree-01
+    100018: flora-tree-02
+    100020: flora-tree-palm-1
+    100022: flora-tree-yucca
+    400000: //RootNode
+    400002: flora-grass-tall
+    400004: flora-grass-tall-more
+    400006: flora-grass-single
+    400008: flora-bush-01
+    400010: flora-bush-02
+    400012: flora-cactus-aloe-1
+    400014: flora-cactus-aloe-2
+    400016: flora-tree-01
+    400018: flora-tree-02
+    400020: flora-tree-palm-1
+    400022: flora-tree-yucca
+    2300000: //RootNode
+    2300002: flora-grass-tall
+    2300004: flora-grass-tall-more
+    2300006: flora-grass-single
+    2300008: flora-bush-01
+    2300010: flora-bush-02
+    2300012: flora-cactus-aloe-1
+    2300014: flora-cactus-aloe-2
+    2300016: flora-tree-01
+    2300018: flora-tree-02
+    2300020: flora-tree-palm-1
+    2300022: flora-tree-yucca
+    3300000: //RootNode
+    3300002: flora-grass-tall
+    3300004: flora-grass-tall-more
+    3300006: flora-grass-single
+    3300008: flora-bush-01
+    3300010: flora-bush-02
+    3300012: flora-cactus-aloe-1
+    3300014: flora-cactus-aloe-2
+    3300016: flora-tree-01
+    3300018: flora-tree-02
+    3300020: flora-tree-palm-1
+    3300022: flora-tree-yucca
+    4300000: flora-grass-tall
+    4300002: flora-grass-tall-more
+    4300004: flora-grass-single
+    4300006: flora-tree-yucca
+    4300008: flora-cactus-aloe-2
+    4300010: flora-cactus-aloe-1
+    4300012: flora-tree-palm-1
+    4300014: flora-bush-01
+    4300016: flora-bush-02
+    4300018: flora-tree-01
+    4300020: flora-tree-02
+  externalObjects: {}
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

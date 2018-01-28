@@ -4,6 +4,8 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
+  public static event System.Action<PlayerController> Spawned;
+
   public PlayerTeam PlayerTeam { get; set; }
   public Character Character { get { return _character; } }
   public CameraRig CameraRig { get { return _cameraRig; } }
@@ -64,6 +66,15 @@ public class PlayerController : MonoBehaviour
     float axisVertical = _rewiredPlayer.GetAxis(InputActions.MoveVertical);
     _character.MoveDirection = new Vector3(axisHorizontal, 0, axisVertical);
 
+    if (_interactionController.ClosestInteractable != null)
+    {
+      _cameraRig.IsZoomedOut = _interactionController.ClosestInteractable.GetComponent<Maw>() != null;
+    }
+    else
+    {
+      _cameraRig.IsZoomedOut = false;
+    }
+
     // Try to pick up an interactable if we aren't holding one
     if (_rewiredPlayer.GetButtonDown(InputActions.PickupDrop))
     {
@@ -76,6 +87,7 @@ public class PlayerController : MonoBehaviour
         Item item = _interactionController.ClosestInteractable.GetComponent<Item>();
         if (item != null)
         {
+          item.OwnedByPlayer = this;
           _character.HoldItem(item);
         }
       }
@@ -88,13 +100,18 @@ public class PlayerController : MonoBehaviour
       if (targetPlayer != null)
       {
         _character.TransmitItem(targetPlayer.Character);
-        targetPlayer.CameraRig.Shake(_transmitScreenShakeDuration, _transmitScreenShakeMagnitude);
       }
       else
       {
         Debug.LogError("Tried to transmit an item but no second player");
       }
     }
+  }
+
+  private void OnCharacterVomited(Item item)
+  {
+    item.OwnedByPlayer = this;
+    _cameraRig.Shake(_transmitScreenShakeDuration, _transmitScreenShakeMagnitude);
   }
 
   private void OnPlayerSpawned(Transform spawnPoint)
@@ -110,6 +127,7 @@ public class PlayerController : MonoBehaviour
     Character characterPrefab = _characterPrefabs[Player.PlayerCount - 1];
     _character = Instantiate(characterPrefab, transform);
     _character.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+    _character.ItemVomited += OnCharacterVomited;
 
     // Set up interaction controller 
     _interactionController.TrackedTransform = _character.transform;
@@ -131,5 +149,10 @@ public class PlayerController : MonoBehaviour
     // Update splitscreen
     _splitscreenPlayer.PlayerCamera = _cameraRig.Camera;
     SplitscreenPlayer.UpdateViewports();
+
+    if (Spawned != null)
+    {
+      Spawned(this);
+    }
   }
 }

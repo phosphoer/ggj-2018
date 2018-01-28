@@ -59,10 +59,13 @@ public class Interactable : MonoBehaviour
   private void OnEnable()
   {
     _instances.Add(this);
-
-    _interactableUI = Instantiate(_interactableUIPrefab);
-    _interactableUI.gameObject.SetActive(false);
     _firstUpdate = true;
+
+    if (_interactableUIPrefab != null)
+    {
+      _interactableUI = Instantiate(_interactableUIPrefab);
+      _interactableUI.gameObject.SetActive(false);
+    }
   }
 
   private void OnDisable()
@@ -103,8 +106,11 @@ public class Interactable : MonoBehaviour
 
   public void ShowPrompt()
   {
-    _interactableUI.gameObject.SetActive(true);
-    _interactableUI.InteractionText = _interactionText;
+    if (_interactableUI != null)
+    {
+      _interactableUI.gameObject.SetActive(true);
+      _interactableUI.InteractionText = _interactionText;
+    }
 
     if (PromptShown != null)
     {
