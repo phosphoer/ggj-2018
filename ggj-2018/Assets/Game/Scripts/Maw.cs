@@ -74,6 +74,9 @@ public class Maw : MonoBehaviour
   [SerializeField]
   private Transform _speechBubbleUI = null;
 
+  [SerializeField]
+  private GameObject _speechXIcon = null;
+
   private int _mistakeCount;
   private int _correctCount;
   private Dictionary<PlayerController, Item.ItemDefinition> _desiredItems;
@@ -224,6 +227,7 @@ public class Maw : MonoBehaviour
   private void OnPromptHidden()
   {
     --_nearbyPlayerCount;
+    _speechXIcon.SetActive(false);
   }
 
   private void OnPlayerSpawned(PlayerController playerController)
@@ -245,6 +249,7 @@ public class Maw : MonoBehaviour
 
     _animator.SetBool("Happy", false);
     AudioManager.Instance.PlaySound(_angrySound);
+    _speechXIcon.SetActive(true);
 
     foreach (PlayerController playerController in _desiredItems.Keys)
     {
