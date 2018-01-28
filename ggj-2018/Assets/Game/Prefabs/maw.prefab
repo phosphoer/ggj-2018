@@ -2372,6 +2372,12 @@ MonoBehaviour:
     m_RotationOrder: 0
   _eyeBlinkIntervalMin: 3
   _eyeBlinkIntervalMax: 10
+  _victoryTorches:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &114538865580959704
 MonoBehaviour:
   m_ObjectHideFlags: 1

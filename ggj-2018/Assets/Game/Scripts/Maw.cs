@@ -44,6 +44,9 @@ public class Maw : MonoBehaviour
   [SerializeField]
   private float _eyeBlinkIntervalMax = 10.0f;
 
+  [SerializeField]
+  private GameObject[] _victoryTorches = null;
+
   private int _mistakeCount;
   private int _correctCount;
   private Dictionary<PlayerController, Item.ItemDefinition> _desiredItems;
@@ -60,6 +63,11 @@ public class Maw : MonoBehaviour
     _interactable.PromptShown += OnPromptShown;
     _interactable.PromptHidden += OnPromptHidden;
     PlayerController.Spawned += OnPlayerSpawned;
+
+    foreach (GameObject victoryTorch in _victoryTorches)
+    {
+      victoryTorch.transform.localScale = Vector3.zero;
+    }
   }
 
   private void Update()
@@ -77,6 +85,13 @@ public class Maw : MonoBehaviour
     scale.x = _eyeOriginalScale.x * _eyeBlinkScale * _eyeOpenScale;
     scale.z = _eyeOriginalScale.z * _eyeOpenScale;
     _eyesTransform.localScale = scale;
+
+    for (int i = 0; i < _victoryTorches.Length; ++i)
+    {
+      GameObject victoryTorch = _victoryTorches[i];
+      bool isLit = _correctCount > i;
+      victoryTorch.transform.localScale = Mathfx.Damp(victoryTorch.transform.localScale, isLit ? Vector3.one : Vector3.zero, 0.5f, Time.deltaTime);
+    }
   }
 
   private IEnumerator EyeBlinkRoutine()
