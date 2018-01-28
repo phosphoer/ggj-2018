@@ -4,6 +4,8 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
+  public static event System.Action<PlayerController> Spawned;
+
   public PlayerTeam PlayerTeam { get; set; }
   public Character Character { get { return _character; } }
   public CameraRig CameraRig { get { return _cameraRig; } }
@@ -76,6 +78,7 @@ public class PlayerController : MonoBehaviour
         Item item = _interactionController.ClosestInteractable.GetComponent<Item>();
         if (item != null)
         {
+          item.OwnedByPlayer = this;
           _character.HoldItem(item);
         }
       }
@@ -131,5 +134,10 @@ public class PlayerController : MonoBehaviour
     // Update splitscreen
     _splitscreenPlayer.PlayerCamera = _cameraRig.Camera;
     SplitscreenPlayer.UpdateViewports();
+
+    if (Spawned != null)
+    {
+      Spawned(this);
+    }
   }
 }

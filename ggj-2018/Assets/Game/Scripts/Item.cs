@@ -9,10 +9,22 @@ public class Item : MonoBehaviour
     Shape
   }
 
+  public struct ItemDefinition
+  {
+    public int FaceIndex;
+    public int ShapeIndex;
+  }
+
   public Rigidbody Rigidbody { get { return _rigidBody; } }
   public Collider Collider { get { return _collider; } }
   public Interactable Interactable { get { return _interactable; } }
+  public int TypeCount { get { return _faces.Length; } }
+  public ItemDefinition Definition
+  {
+    get { return new ItemDefinition() { FaceIndex = _currentFaceIndex, ShapeIndex = _currentShapeIndex }; }
+  }
 
+  public PlayerController OwnedByPlayer { get; set; }
   public bool IsBeingHeld
   {
     get { return _isBeingHeld; }
