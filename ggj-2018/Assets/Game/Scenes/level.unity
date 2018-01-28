@@ -309,6 +309,7 @@ Transform:
   - {fileID: 724778708}
   - {fileID: 234846522}
   - {fileID: 1122877045}
+  - {fileID: 948792440}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2934,6 +2935,34 @@ Transform:
   m_PrefabParentObject: {fileID: 4258962723565598, guid: 9d9d8dc36451f2c43950bf8e4ccd2604,
     type: 2}
   m_PrefabInternal: {fileID: 843908431}
+--- !u!1 &948792439
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 948792440}
+  m_Layer: 0
+  m_Name: Flora
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &948792440
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 948792439}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 91517233}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &948830046
 Prefab:
   m_ObjectHideFlags: 0
@@ -4801,8 +4830,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 377222655}
   - {fileID: 2056161596}
+  - {fileID: 377222655}
   - {fileID: 1445254844}
   - {fileID: 373604722}
   m_Father: {fileID: 0}
@@ -6578,6 +6607,24 @@ Transform:
   m_PrefabParentObject: {fileID: 4258962723565598, guid: 9d9d8dc36451f2c43950bf8e4ccd2604,
     type: 2}
   m_PrefabInternal: {fileID: 2018516879}
+--- !u!1 &2038667827 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: b8a71631ddea5ef4cb221d2debeae868, type: 3}
+  m_PrefabInternal: {fileID: 1553856431}
+--- !u!64 &2038667830
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2038667827}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: b8a71631ddea5ef4cb221d2debeae868, type: 3}
 --- !u!1001 &2047515870
 Prefab:
   m_ObjectHideFlags: 0
@@ -6742,7 +6789,7 @@ Transform:
   - {fileID: 1967037410}
   - {fileID: 265704006}
   m_Father: {fileID: 1600517709}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2060176907
 Prefab:
