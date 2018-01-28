@@ -66,6 +66,15 @@ public class PlayerController : MonoBehaviour
     float axisVertical = _rewiredPlayer.GetAxis(InputActions.MoveVertical);
     _character.MoveDirection = new Vector3(axisHorizontal, 0, axisVertical);
 
+    if (_interactionController.ClosestInteractable != null)
+    {
+      _cameraRig.IsZoomedOut = _interactionController.ClosestInteractable.GetComponent<Maw>() != null;
+    }
+    else
+    {
+      _cameraRig.IsZoomedOut = false;
+    }
+
     // Try to pick up an interactable if we aren't holding one
     if (_rewiredPlayer.GetButtonDown(InputActions.PickupDrop))
     {

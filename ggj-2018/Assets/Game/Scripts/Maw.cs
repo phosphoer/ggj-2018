@@ -1,8 +1,28 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class Maw : MonoBehaviour
 {
+  public bool IsOpen
+  {
+    get { return _isOpen; }
+    set
+    {
+      _isOpen = value;
+      _animator.SetBool("Open", _isOpen);
+    }
+  }
+
+  [SerializeField]
+  private Interactable _interactable = null;
+
+  [SerializeField]
+  private Animator _animator = null;
+
+  [SerializeField]
+  private Transform _eyesTransform = null;
+
   [SerializeField]
   private Item _itemPrefab = null;
 
@@ -12,14 +32,61 @@ public class Maw : MonoBehaviour
   [SerializeField]
   private int _winningCorrectCount = 5;
 
+  [SerializeField]
+  private float _eyeBlinkTime = 0.25f;
+
+  [SerializeField]
+  private AnimationCurve _eyeBlinkScaleCurve;
+
+  [SerializeField]
+  private float _eyeBlinkIntervalMin = 3.0f;
+
+  [SerializeField]
+  private float _eyeBlinkIntervalMax = 10.0f;
+
   private int _mistakeCount;
   private int _correctCount;
   private Dictionary<PlayerController, Item.ItemDefinition> _desiredItems;
+  private float _eyeBlinkTimer;
+  private Vector3 _eyeOriginalScale;
+  private float _eyeBlinkScale = 1.0f;
+  private float _eyeOpenScale = 1.0f;
+  private bool _isOpen;
 
   private void Awake()
   {
     _desiredItems = new Dictionary<PlayerController, Item.ItemDefinition>();
+    _eyeOriginalScale = _eyesTransform.localScale;
+    _interactable.PromptShown += OnPromptShown;
+    _interactable.PromptHidden += OnPromptHidden;
     PlayerController.Spawned += OnPlayerSpawned;
+  }
+
+  private void Update()
+  {
+    _eyeBlinkTimer -= Time.deltaTime;
+    if (_eyeBlinkTimer < 0)
+    {
+      _eyeBlinkTimer = Random.Range(_eyeBlinkIntervalMin, _eyeBlinkIntervalMax);
+      StartCoroutine(EyeBlinkRoutine());
+    }
+
+    _eyeOpenScale = Mathfx.Damp(_eyeOpenScale, IsOpen ? 1.5f : 1.0f, 0.5f, Time.deltaTime * 5.0f);
+
+    Vector3 scale = _eyesTransform.localScale;
+    scale.x = _eyeOriginalScale.x * _eyeBlinkScale * _eyeOpenScale;
+    scale.z = _eyeOriginalScale.z * _eyeOpenScale;
+    _eyesTransform.localScale = scale;
+  }
+
+  private IEnumerator EyeBlinkRoutine()
+  {
+    for (float time = 0; time < _eyeBlinkTime; time += Time.deltaTime)
+    {
+      float blinkT = time / _eyeBlinkTime;
+      _eyeBlinkScale = _eyeBlinkScaleCurve.Evaluate(blinkT);
+      yield return null;
+    }
   }
 
   private void OnCollisionEnter(Collision collision)
@@ -43,6 +110,16 @@ public class Maw : MonoBehaviour
     }
 
     CheckWinLose();
+  }
+
+  private void OnPromptShown()
+  {
+    IsOpen = true;
+  }
+
+  private void OnPromptHidden()
+  {
+    IsOpen = false;
   }
 
   private void OnPlayerSpawned(PlayerController playerController)

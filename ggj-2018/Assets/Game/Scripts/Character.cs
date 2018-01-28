@@ -224,16 +224,19 @@ public class Character : MonoBehaviour
       _characterAnimator.ItemVomited -= OnAnimationItemVomited;
     }
 
-    _pendingItemVomit.transform.SetPositionAndRotation(_vomitAnchor.position, _vomitAnchor.rotation);
-
-    Vector3 throwForce = transform.TransformDirection(_throwForceLocal) * 1.5f;
-    _pendingItemVomit.gameObject.SetActive(true);
-    _pendingItemVomit.IsBeingHeld = false;
-    _pendingItemVomit.Rigidbody.AddForce(throwForce, ForceMode.Impulse);
-
-    if (ItemVomited != null)
+    if (_pendingItemVomit != null)
     {
-      ItemVomited(_pendingItemVomit);
+      _pendingItemVomit.transform.SetPositionAndRotation(_vomitAnchor.position, _vomitAnchor.rotation);
+
+      Vector3 throwForce = transform.TransformDirection(_throwForceLocal) * 1.5f;
+      _pendingItemVomit.gameObject.SetActive(true);
+      _pendingItemVomit.IsBeingHeld = false;
+      _pendingItemVomit.Rigidbody.AddForce(throwForce, ForceMode.Impulse);
+
+      if (ItemVomited != null)
+      {
+        ItemVomited(_pendingItemVomit);
+      }
     }
 
     _itemIsInUse = false;
