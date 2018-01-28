@@ -49,6 +49,7 @@ public class Character : MonoBehaviour
   {
     _heldItemOriginalParent = item.transform.parent;
     _pendingItemPickup = item;
+    item.IsBeingHeld = true;
 
     if (_characterAnimator != null)
     {
@@ -184,7 +185,6 @@ public class Character : MonoBehaviour
     _heldItem.transform.SetParent(_heldItemAnchor);
     _heldItem.transform.localPosition = Vector3.zero;
     _heldItem.transform.localRotation = Quaternion.identity;
-    _heldItem.IsBeingHeld = true;
 
     _pendingItemPickup = null;
   }
@@ -193,12 +193,12 @@ public class Character : MonoBehaviour
   {
     if (_characterAnimator != null)
     {
-      _characterAnimator.ItemPickedUp -= OnAnimationItemEaten;
+      _characterAnimator.ItemEaten -= OnAnimationItemEaten;
       _characterAnimator.IsCarrying = false;
     }
 
     _heldItem.transform.SetParent(_heldItemOriginalParent);
-    _heldItem.IsBeingHeld = false;
+    _heldItem.gameObject.SetActive(false);
 
     TransmuteItem(_heldItem);
     _pendingTransmitCharacter.ReceiveItem(_heldItem);
@@ -217,6 +217,8 @@ public class Character : MonoBehaviour
     _pendingItemVomit.transform.SetPositionAndRotation(_vomitAnchor.position, _vomitAnchor.rotation);
 
     Vector3 throwForce = transform.TransformDirection(_throwForceLocal) * 1.5f;
+    _pendingItemVomit.gameObject.SetActive(true);
+    _pendingItemVomit.IsBeingHeld = false;
     _pendingItemVomit.Rigidbody.AddForce(throwForce, ForceMode.Impulse);
 
     if (ItemVomited != null)

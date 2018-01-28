@@ -61,7 +61,7 @@ MonoBehaviour:
   _interactionController: {fileID: 114632687488382242}
   _characterPrefabs:
   - {fileID: 114778935340072542, guid: 39528f258cfb44aff8bd5932cb7de011, type: 2}
-  - {fileID: 114778935340072542, guid: 5f86d675beb5440e6a62c0dfd7b74e21, type: 2}
+  - {fileID: 114834935459813678, guid: 5f86d675beb5440e6a62c0dfd7b74e21, type: 2}
   _playerCameraPrefab: {fileID: 114633141577072870, guid: 44b4194afe3214a25a1c51f125740fa1,
     type: 2}
   _transmitScreenShakeDuration: 0.3
