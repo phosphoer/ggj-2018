@@ -64,6 +64,9 @@ public class Maw : MonoBehaviour
   private SoundBank _openSound = null;
 
   [SerializeField]
+  private SoundBank _transformSound = null;
+
+  [SerializeField]
   private int _typeCountPerGame = 3;
 
   [SerializeField]
@@ -371,7 +374,7 @@ public class Maw : MonoBehaviour
       creature.Interactable.enabled = false;
       creature.transform.SetPositionAndRotation(playerController.Character.transform.position, playerController.Character.transform.rotation);
       playerController.Character.gameObject.SetActive(false);
-      AudioManager.Instance.PlaySound(_talkSound);
+      AudioManager.Instance.PlaySound(_transformSound);
       yield return new WaitForSeconds(3.0f);
 
       playerController.Player.Respawn();

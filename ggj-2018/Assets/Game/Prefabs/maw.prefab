@@ -2610,6 +2610,7 @@ MonoBehaviour:
   _talkSound: {fileID: 11400000, guid: df438cae2906c4c1c8cc6abbf309c1a2, type: 2}
   _happySound: {fileID: 11400000, guid: 3777f4fcb3ef037489609a91f03cbf69, type: 2}
   _openSound: {fileID: 11400000, guid: b1d4c5787a4b57f48987fece4c6063c2, type: 2}
+  _transformSound: {fileID: 11400000, guid: 68fc5538d8b9549d8a3861cf8611bc97, type: 2}
   _typeCountPerGame: 3
   _creatureCount: 50
   _leftSpawnPoints:
