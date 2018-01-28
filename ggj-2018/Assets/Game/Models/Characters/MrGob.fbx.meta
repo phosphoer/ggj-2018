@@ -62,6 +62,29 @@ ModelImporter:
     100108: Stomach
     100110: UpperBackCtrl
     100112: UpperLip
+    100114: Belly
+    100116: bottom
+    100118: Head 1
+    100120: ikHandle5
+    100122: ikHandle6
+    100124: L_BrowCtrl
+    100126: L_EyeCtrl
+    100128: L_FootCtrl
+    100130: L_LidCtrl
+    100132: LeftMouthCtrl
+    100134: LLeg_PV
+    100136: LLeg_PV1
+    100138: LowerJawCtrl
+    100140: MouthCtrl
+    100142: PropLoc
+    100144: R_BrowCtrl
+    100146: R_EyeCtrl
+    100148: R_FootCtrl
+    100150: R_LidCtrl
+    100152: RightMouthCtrl
+    100154: UpperLeftMouthCtrl
+    100156: UpperMouthCtrl
+    100158: UpperRightMouthCtrl
     400000: Body
     400002: Head
     400004: HipsCtrl
@@ -119,6 +142,30 @@ ModelImporter:
     400108: Stomach
     400110: UpperBackCtrl
     400112: UpperLip
+    400114: Belly
+    400116: bottom
+    400118: Head 1
+    400120: ikHandle5
+    400122: ikHandle6
+    400124: L_BrowCtrl
+    400126: L_EyeCtrl
+    400128: L_FootCtrl
+    400130: L_LidCtrl
+    400132: LeftMouthCtrl
+    400134: LLeg_PV
+    400136: LLeg_PV1
+    400138: LowerJawCtrl
+    400140: MouthCtrl
+    400142: PropLoc
+    400144: R_BrowCtrl
+    400146: R_EyeCtrl
+    400148: R_FootCtrl
+    400150: R_LidCtrl
+    400152: RightMouthCtrl
+    400154: UpperLeftMouthCtrl
+    400156: UpperMouthCtrl
+    400158: UpperRightMouthCtrl
+    2000000: bottom
     2100000: lambert1
     2100002: MrGob
     2300000: L_Brow
@@ -126,17 +173,20 @@ ModelImporter:
     2300004: pCube1
     2300006: R_Brow
     2300008: R_Eye
+    2300010: PropLoc
     3300000: L_Brow
     3300002: L_Eye
     3300004: pCube1
     3300006: R_Brow
     3300008: R_Eye
+    3300010: PropLoc
     4300000: pCube1
     4300002: R_Brow
     4300004: L_Eye
     4300006: L_Brow
     4300008: R_Eye
     4300010: Body
+    4300012: PropLoc
     7400000: tPose
     7400002: Walk
     7400004: Cary
