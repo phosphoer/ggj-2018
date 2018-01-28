@@ -147,6 +147,7 @@ public class Maw : MonoBehaviour
       GameObject victoryTorch = _victoryTorches[i];
       bool isLit = _mistakeCount <= i;
       victoryTorch.transform.localScale = Mathfx.Damp(victoryTorch.transform.localScale, isLit ? Vector3.one : Vector3.zero, 0.5f, Time.deltaTime);
+      victoryTorch.gameObject.SetActive(victoryTorch.transform.localScale.x > 0.05f);
     }
 
     // Show speech bubble 
@@ -213,6 +214,11 @@ public class Maw : MonoBehaviour
   private void OnPromptShown()
   {
     ++_nearbyPlayerCount;
+
+    if (_talkSound != null)
+    {
+      AudioManager.Instance.PlaySound(_talkSound);
+    }
   }
 
   private void OnPromptHidden()
