@@ -108,6 +108,7 @@ public class Character : MonoBehaviour
   public void ReceiveItem(Item item)
   {
     _pendingItemVomit = item;
+    _itemIsInUse = true;
 
     if (_characterAnimator != null)
     {
@@ -235,6 +236,7 @@ public class Character : MonoBehaviour
       ItemVomited(_pendingItemVomit);
     }
 
+    _itemIsInUse = false;
     _pendingItemVomit = null;
   }
 }
