@@ -11,7 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 200dcdc2f387a47cab1b461062e1b64d, type: 3}
   m_Name: sound-maw-close
   m_EditorClassIdentifier: 
-  AudioClips: []
+  AudioClips:
+  - {fileID: 8300000, guid: d682e7c048118a747adb0de97bf7559c, type: 3}
   IsSpatial: 0
   MaxDistance: 100
   MinDistance: 10

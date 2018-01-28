@@ -11,10 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 200dcdc2f387a47cab1b461062e1b64d, type: 3}
   m_Name: sound-BGM-looping
   m_EditorClassIdentifier: 
-  AudioClips: []
+  AudioClips:
+  - {fileID: 8300000, guid: 195380b552eea264eba2f8b2a9213d2f, type: 3}
   IsSpatial: 0
   MaxDistance: 100
   MinDistance: 10
   VolumeScale: 1
-  IsLooping: 0
+  IsLooping: 1
   AudioMixerGroup: {fileID: 0}

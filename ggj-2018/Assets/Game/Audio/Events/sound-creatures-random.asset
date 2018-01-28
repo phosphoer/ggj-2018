@@ -11,7 +11,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 200dcdc2f387a47cab1b461062e1b64d, type: 3}
   m_Name: sound-creatures-random
   m_EditorClassIdentifier: 
-  AudioClips: []
+  AudioClips:
+  - {fileID: 8300000, guid: b2b2b73402cd0d64aa36781e3ba19b9f, type: 3}
+  - {fileID: 8300000, guid: b2b65236b4afaca4787e6d9afd644ccf, type: 3}
+  - {fileID: 8300000, guid: bb15611ce13395c448fc3e11bab15d2b, type: 3}
+  - {fileID: 8300000, guid: 39291ead967d30b4ebb3acecf8916309, type: 3}
+  - {fileID: 8300000, guid: b817aa15e2ae9f849a1e08f9a6b6c9e8, type: 3}
+  - {fileID: 8300000, guid: 1a42bd53e908ee64b871e000926d8aa5, type: 3}
+  - {fileID: 8300000, guid: 47935021656c1de43b1c7bf81d268585, type: 3}
+  - {fileID: 8300000, guid: 19743226f828f7346890948e2ab1e129, type: 3}
   IsSpatial: 0
   MaxDistance: 100
   MinDistance: 10

@@ -11,6 +11,7 @@ public class Maw : MonoBehaviour
     {
       _isOpen = value;
       _animator.SetBool("Open", _isOpen);
+      AudioManager.Instance.PlaySound(_openSound);
     }
   }
 
@@ -55,6 +56,12 @@ public class Maw : MonoBehaviour
 
   [SerializeField]
   private SoundBank _talkSound = null;
+
+  [SerializeField]
+  private SoundBank _happySound = null;
+
+  [SerializeField]
+  private SoundBank _openSound = null;
 
   [SerializeField]
   private int _typeCountPerGame = 3;
@@ -245,6 +252,7 @@ public class Maw : MonoBehaviour
   {
     _animator.SetBool("Happy", true);
     AudioManager.Instance.PlaySound(_eatSound);
+    AudioManager.Instance.PlaySound(_happySound);
     PickNewDesiredItem(byPlayer);
     ++_correctCount;
 
@@ -256,6 +264,7 @@ public class Maw : MonoBehaviour
     ++_mistakeCount;
 
     _animator.SetBool("Happy", false);
+    AudioManager.Instance.PlaySound(_eatSound);
     AudioManager.Instance.PlaySound(_angrySound);
     _speechXIcon.SetActive(true);
 
