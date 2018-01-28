@@ -11,6 +11,7 @@ public class PlayerJoinManager : Singleton<PlayerJoinManager>
 
   private void Awake()
   {
+    Instance = this;
     Player.PlayerJoined += OnPlayerJoined;
     Player.PlayerLeft += OnPlayerLeft;
   }

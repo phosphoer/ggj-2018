@@ -15,6 +15,7 @@ public class GameStateJoin : ActionBase
   {
     yield return null;
 
+    PlayerJoinManager.Instance.enabled = true;
     Player.PlayerJoined += OnPlayerJoined;
 
     while (Player.PlayerCount < _waitForPlayerCount)

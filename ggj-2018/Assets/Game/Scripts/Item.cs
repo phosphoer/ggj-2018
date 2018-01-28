@@ -78,6 +78,9 @@ public class Item : MonoBehaviour
   [SerializeField]
   private Color[] _colors = null;
 
+  [SerializeField]
+  private SoundBank _creatureSound = null;
+
   private bool _isBeingHeld;
   private Coroutine _reEnableRoutine;
   private int _currentFaceIndex;
@@ -99,16 +102,23 @@ public class Item : MonoBehaviour
   {
     _currentFaceIndex = Random.Range(0, _faces.Length);
     _currentShapeIndex = Random.Range(0, _shapes.Length);
+    UpdateVisual();
   }
 
   private void Start()
   {
     ++InstanceCount;
+    _interactable.PromptShown += OnPromptShown;
   }
 
   private void OnDestroy()
   {
     --InstanceCount;
+  }
+
+  private void OnPromptShown()
+  {
+    AudioManager.Instance.PlaySound(_creatureSound);
   }
 
   private void UpdateVisual()

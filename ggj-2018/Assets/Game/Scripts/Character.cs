@@ -253,7 +253,16 @@ public class Character : MonoBehaviour
     _heldItem.gameObject.SetActive(false);
 
     TransmuteItem(_heldItem);
-    _pendingTransmitCharacter.ReceiveItem(_heldItem);
+
+    if (_pendingTransmitCharacter != null)
+    {
+      _pendingTransmitCharacter.ReceiveItem(_heldItem);
+    }
+    else
+    {
+      ReceiveItem(_heldItem);
+    }
+
     _heldItem = null;
     _itemIsInUse = false;
 

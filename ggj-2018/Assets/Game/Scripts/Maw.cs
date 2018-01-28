@@ -11,6 +11,7 @@ public class Maw : MonoBehaviour
     {
       _isOpen = value;
       _animator.SetBool("Open", _isOpen);
+      AudioManager.Instance.PlaySound(_openSound);
     }
   }
 
@@ -57,6 +58,15 @@ public class Maw : MonoBehaviour
   private SoundBank _talkSound = null;
 
   [SerializeField]
+  private SoundBank _happySound = null;
+
+  [SerializeField]
+  private SoundBank _openSound = null;
+
+  [SerializeField]
+  private SoundBank _transformSound = null;
+
+  [SerializeField]
   private int _typeCountPerGame = 3;
 
   [SerializeField]
@@ -79,6 +89,9 @@ public class Maw : MonoBehaviour
 
   [SerializeField]
   private SkullLightController _skullAltar = null;
+
+  [SerializeField]
+  private ParticleSystem _confettiParticle = null;
 
   private int _mistakeCount;
   private int _correctCount;
@@ -242,6 +255,7 @@ public class Maw : MonoBehaviour
   {
     _animator.SetBool("Happy", true);
     AudioManager.Instance.PlaySound(_eatSound);
+    AudioManager.Instance.PlaySound(_happySound);
     PickNewDesiredItem(byPlayer);
     ++_correctCount;
 
@@ -253,6 +267,7 @@ public class Maw : MonoBehaviour
     ++_mistakeCount;
 
     _animator.SetBool("Happy", false);
+    AudioManager.Instance.PlaySound(_eatSound);
     AudioManager.Instance.PlaySound(_angrySound);
     _speechXIcon.SetActive(true);
 
@@ -275,7 +290,109 @@ public class Maw : MonoBehaviour
 
   private void CheckWinLose()
   {
+    if (_correctCount >= _winningCorrectCount)
+    {
+      Win();
+    }
+    else if (_mistakeCount >= _losingMistakeCount)
+    {
+      Lose();
+    }
+  }
 
+  [ContextMenu("Lose")]
+  private void Lose()
+  {
+    StartCoroutine(LoseRoutine());
+  }
+
+  [ContextMenu("Win")]
+  private void Win()
+  {
+    StartCoroutine(WinRoutine());
+  }
+
+  private IEnumerator WinRoutine()
+  {
+    // Zoom out
+    PlayerController[] players = FindObjectsOfType<PlayerController>();
+    foreach (PlayerController playerController in players)
+    {
+      playerController.enabled = false;
+      playerController.CameraRig.IsZoomedOut = true;
+      playerController.CameraRig.IsZoomedIn = false;
+      playerController.Character.transform.rotation = Quaternion.LookRotation(Vector3.back);
+    }
+
+    yield return new WaitForSeconds(3.0f);
+
+    // Wheeee /s
+    _confettiParticle.Play();
+
+    yield return new WaitForSeconds(3.0f);
+
+    // Zoom in
+    foreach (PlayerController playerController in players)
+    {
+      playerController.CameraRig.IsZoomedOut = false;
+      playerController.CameraRig.IsZoomedIn = true;
+    }
+    yield return new WaitForSeconds(10.0f);
+
+    // Zoom back out
+    foreach (PlayerController playerController in players)
+    {
+      playerController.enabled = true;
+      CameraRig cameraRig = playerController.CameraRig;
+      cameraRig.IsZoomedIn = false;
+      cameraRig.IsZoomedOut = false;
+      PickNewDesiredItem(playerController);
+    }
+
+    // Wait a bit for good measure
+    yield return new WaitForSeconds(5.0f);
+
+    // Reset the maw 
+    ResetMaw();
+  }
+
+  private IEnumerator LoseRoutine()
+  {
+    PlayerController[] players = FindObjectsOfType<PlayerController>();
+    foreach (PlayerController playerController in players)
+    {
+      // Zoom into the player 
+      playerController.enabled = false;
+      CameraRig cameraRig = playerController.CameraRig;
+      cameraRig.IsZoomedIn = true;
+      cameraRig.IsZoomedOut = false;
+      yield return new WaitForSeconds(3.0f);
+
+      // Turn player into a creature 
+      Item creature = Instantiate(_itemPrefab);
+      creature.Randomize();
+      creature.Interactable.enabled = false;
+      creature.transform.SetPositionAndRotation(playerController.Character.transform.position, playerController.Character.transform.rotation);
+      playerController.Character.gameObject.SetActive(false);
+      AudioManager.Instance.PlaySound(_transformSound);
+      yield return new WaitForSeconds(3.0f);
+
+      playerController.Player.Respawn();
+      playerController.enabled = true;
+
+      PickNewDesiredItem(playerController, creature.Definition);
+      creature.Interactable.enabled = true;
+    }
+
+    // Reset the maw 
+    ResetMaw();
+  }
+
+  private void ResetMaw()
+  {
+    _skullAltar.ResetAll();
+    _mistakeCount = 0;
+    _correctCount = 0;
   }
 
   private void PickNewDesiredItem(PlayerController forPlayer)
@@ -283,7 +400,11 @@ public class Maw : MonoBehaviour
     Item.ItemDefinition desiredItem;
     desiredItem.FaceIndex = _faceIndicesThisGame[Random.Range(0, _faceIndicesThisGame.Count)];
     desiredItem.ShapeIndex = _shapeIndicesThisGame[Random.Range(0, _shapeIndicesThisGame.Count)];
+    PickNewDesiredItem(forPlayer, desiredItem);
+  }
 
+  private void PickNewDesiredItem(PlayerController forPlayer, Item.ItemDefinition desiredItem)
+  {
     _desiredItems[forPlayer] = desiredItem;
 
     Item itemDisplay;

@@ -2198,6 +2198,7 @@ MonoBehaviour:
   - {r: 0.6911765, g: 0.73164296, b: 1, a: 1}
   - {r: 0.99264705, g: 0.525519, b: 0.94110185, a: 1}
   - {r: 0.7793103, g: 1, b: 0.5294118, a: 1}
+  _creatureSound: {fileID: 11400000, guid: 859805c13bf887f4599259e7abf346a5, type: 2}
 --- !u!114 &114113958973539726
 MonoBehaviour:
   m_ObjectHideFlags: 1
