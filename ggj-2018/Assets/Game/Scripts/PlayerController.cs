@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
       }
       else
       {
-        Debug.LogError("Tried to transmit an item but no second player");
+        _character.TransmitItem(null);
       }
     }
   }

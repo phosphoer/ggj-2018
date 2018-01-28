@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: sound-BGM-Intro
   m_EditorClassIdentifier: 
   AudioClips:
-  - {fileID: 8300000, guid: 7caf2f7c094c18d4da86120a1e26869d, type: 3}
+  - {fileID: 8300000, guid: 7a9e693d29ebfd940acca481f1f339a8, type: 3}
   IsSpatial: 0
   MaxDistance: 100
   MinDistance: 10

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: sound-BGM-looping
   m_EditorClassIdentifier: 
   AudioClips:
-  - {fileID: 8300000, guid: 195380b552eea264eba2f8b2a9213d2f, type: 3}
+  - {fileID: 8300000, guid: 25a91445e2cc8184980f3487a5effccd, type: 3}
   IsSpatial: 0
   MaxDistance: 100
   MinDistance: 10
