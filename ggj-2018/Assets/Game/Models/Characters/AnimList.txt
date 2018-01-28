@@ -6,3 +6,4 @@
 124-148 - Pickup
 149-197 - Idle
 198 - 222 - Vom
+223 - 271 Carry Idle
