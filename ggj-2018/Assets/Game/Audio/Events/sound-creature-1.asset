@@ -9,10 +9,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 200dcdc2f387a47cab1b461062e1b64d, type: 3}
-  m_Name: sound-event-maw-eat
+  m_Name: sound-creature-1
   m_EditorClassIdentifier: 
   AudioClips:
-  - {fileID: 8300000, guid: ee6fd35f9204e4e4a9369b83f4bc4351, type: 3}
+  - {fileID: 8300000, guid: b2b2b73402cd0d64aa36781e3ba19b9f, type: 3}
   IsSpatial: 0
   MaxDistance: 100
   MinDistance: 10

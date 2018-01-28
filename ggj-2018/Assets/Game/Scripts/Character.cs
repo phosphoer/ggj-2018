@@ -45,6 +45,15 @@ public class Character : MonoBehaviour
   [SerializeField]
   private SoundBank _barfStartSound = null;
 
+  [SerializeField]
+  private SoundBank _eatSound = null;
+
+  [SerializeField]
+  private SoundBank _gulpSound = null;
+
+  [SerializeField]
+  private SoundBank _pickupSound = null;
+
   private Vector3 _moveDirection;
   private Vector3 _lastMoveDirection;
   private Item _heldItem;
@@ -98,6 +107,11 @@ public class Character : MonoBehaviour
     {
       _itemIsInUse = true;
       _pendingTransmitCharacter = targetCharacter;
+
+      if (_eatSound != null)
+      {
+        AudioManager.Instance.PlaySound(_eatSound);
+      }
 
       if (_characterAnimator != null)
       {
@@ -183,6 +197,11 @@ public class Character : MonoBehaviour
       _characterAnimator.IsCarrying = false;
     }
 
+    if (_pickupSound != null)
+    {
+      AudioManager.Instance.PlaySound(_pickupSound);
+    }
+
     _heldItem.transform.SetParent(_heldItemOriginalParent);
     _heldItem.IsBeingHeld = false;
     _itemIsInUse = false;
@@ -198,6 +217,11 @@ public class Character : MonoBehaviour
     {
       _characterAnimator.ItemPickedUp -= OnAnimationItemPickedUp;
       _characterAnimator.IsCarrying = true;
+    }
+
+    if (_pickupSound != null)
+    {
+      AudioManager.Instance.PlaySound(_pickupSound);
     }
 
     _heldItem = _pendingItemPickup;
@@ -224,6 +248,11 @@ public class Character : MonoBehaviour
     _pendingTransmitCharacter.ReceiveItem(_heldItem);
     _heldItem = null;
     _itemIsInUse = false;
+
+    if (_gulpSound != null)
+    {
+      AudioManager.Instance.PlaySound(_gulpSound);
+    }
 
     _pendingTransmitCharacter = null;
   }

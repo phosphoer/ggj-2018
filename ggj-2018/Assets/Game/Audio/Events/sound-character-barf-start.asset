@@ -9,12 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 200dcdc2f387a47cab1b461062e1b64d, type: 3}
-  m_Name: sound-event-barf
+  m_Name: sound-character-barf-start
   m_EditorClassIdentifier: 
   AudioClips:
-  - {fileID: 8300000, guid: 4acd1c93029f02a44a2fa674b4c52c37, type: 3}
-  - {fileID: 8300000, guid: 3aa83e262db67e24c9f437b217278630, type: 3}
-  - {fileID: 8300000, guid: 7c4ef0b07a35cb840ab4e6382ef30624, type: 3}
+  - {fileID: 8300000, guid: 822a4e118c68e4a4c9d695a6417a90f8, type: 3}
+  - {fileID: 8300000, guid: 18d1792195aa74345b3e34f8d5848b5c, type: 3}
+  - {fileID: 8300000, guid: e844a3606b31cd0409af64aa31cd6958, type: 3}
   IsSpatial: 0
   MaxDistance: 100
   MinDistance: 10

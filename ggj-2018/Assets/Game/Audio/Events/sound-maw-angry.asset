@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 200dcdc2f387a47cab1b461062e1b64d, type: 3}
-  m_Name: sound-event-maw-angry
+  m_Name: sound-maw-angry
   m_EditorClassIdentifier: 
   AudioClips:
   - {fileID: 8300000, guid: 338889e162393a34ab3da93802229a9d, type: 3}

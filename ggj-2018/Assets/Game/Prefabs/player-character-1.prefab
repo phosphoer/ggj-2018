@@ -2572,6 +2572,9 @@ MonoBehaviour:
   _transmuteType: 0
   _barfSound: {fileID: 11400000, guid: a591dd079326544cc9cc07fd44e0f1fc, type: 2}
   _barfStartSound: {fileID: 11400000, guid: 8a9a43d970e1f442594a6bd8a949b561, type: 2}
+  _eatSound: {fileID: 11400000, guid: 33063f3340459480d91e93b4ac45afda, type: 2}
+  _gulpSound: {fileID: 11400000, guid: 4fb1c1cc5e217468ca86e68bef94ef5c, type: 2}
+  _pickupSound: {fileID: 11400000, guid: ec9dba477ad9d42719c3b5f2591fa0f4, type: 2}
 --- !u!135 &135444747741425728
 SphereCollider:
   m_ObjectHideFlags: 1
