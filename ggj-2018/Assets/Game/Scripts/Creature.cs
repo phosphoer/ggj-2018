@@ -29,7 +29,7 @@ public class Creature : MonoBehaviour
   private float _changeDirectionTimer;
   private float _animationTimer;
 
-  private void Start()
+  private void Awake()
   {
     _animationTimer = Random.Range(0.0f, 10.0f);
     _item.IsHeldChanged += OnHeldChanged;

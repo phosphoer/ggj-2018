@@ -68,9 +68,16 @@ public class Maw : MonoBehaviour
   [SerializeField]
   private Transform[] _rightSpawnPoints = null;
 
+  [SerializeField]
+  private Transform _desiredItemSpawn = null;
+
+  [SerializeField]
+  private Transform _speechBubbleUI = null;
+
   private int _mistakeCount;
   private int _correctCount;
   private Dictionary<PlayerController, Item.ItemDefinition> _desiredItems;
+  private Dictionary<PlayerController, Item> _desiredItemsDisplay;
   private List<int> _faceIndicesThisGame = new List<int>();
   private List<int> _shapeIndicesThisGame = new List<int>();
   private float _eyeBlinkTimer;
@@ -78,11 +85,13 @@ public class Maw : MonoBehaviour
   private float _eyeBlinkScale = 1.0f;
   private float _eyeOpenScale = 1.0f;
   private bool _isOpen;
+  private int _nearbyPlayerCount;
   private float _spawnTimer;
 
   private void Awake()
   {
     _desiredItems = new Dictionary<PlayerController, Item.ItemDefinition>();
+    _desiredItemsDisplay = new Dictionary<PlayerController, Item>();
     _eyeOriginalScale = _eyesTransform.localScale;
     _interactable.PromptShown += OnPromptShown;
     _interactable.PromptHidden += OnPromptHidden;
@@ -111,10 +120,13 @@ public class Maw : MonoBehaviour
     {
       victoryTorch.transform.localScale = Vector3.one;
     }
+
+    _speechBubbleUI.localScale = Vector3.zero;
   }
 
   private void Update()
   {
+    // Blinking
     _eyeBlinkTimer -= Time.deltaTime;
     if (_eyeBlinkTimer < 0)
     {
@@ -122,19 +134,24 @@ public class Maw : MonoBehaviour
       StartCoroutine(EyeBlinkRoutine());
     }
 
+    // Scale the eyes
     _eyeOpenScale = Mathfx.Damp(_eyeOpenScale, IsOpen ? 1.5f : 1.0f, 0.5f, Time.deltaTime * 5.0f);
-
     Vector3 scale = _eyesTransform.localScale;
     scale.x = _eyeOriginalScale.x * _eyeBlinkScale * _eyeOpenScale;
     scale.z = _eyeOriginalScale.z * _eyeOpenScale;
     _eyesTransform.localScale = scale;
 
+    // Light torches
     for (int i = 0; i < _victoryTorches.Length; ++i)
     {
       GameObject victoryTorch = _victoryTorches[i];
       bool isLit = _mistakeCount <= i;
       victoryTorch.transform.localScale = Mathfx.Damp(victoryTorch.transform.localScale, isLit ? Vector3.one : Vector3.zero, 0.5f, Time.deltaTime);
     }
+
+    // Show speech bubble 
+    Vector3 desiredScale = _nearbyPlayerCount > 0 ? Vector3.one : Vector3.zero;
+    _speechBubbleUI.localScale = Mathfx.Damp(_speechBubbleUI.localScale, desiredScale, 0.5f, Time.deltaTime * 3.0f);
 
     // Spawn creatures 
     _spawnTimer -= Time.deltaTime;
@@ -173,6 +190,8 @@ public class Maw : MonoBehaviour
     Item item = collision.gameObject.GetComponent<Item>();
     if (item != null)
     {
+      _animator.SetTrigger("Eat");
+
       // If this is the item we wanted from this player
       if (IsCorrectItem(item, item.OwnedByPlayer))
       {
@@ -185,6 +204,7 @@ public class Maw : MonoBehaviour
       }
 
       Destroy(item.gameObject);
+      IsOpen = false;
     }
 
     CheckWinLose();
@@ -192,12 +212,12 @@ public class Maw : MonoBehaviour
 
   private void OnPromptShown()
   {
-    IsOpen = true;
+    ++_nearbyPlayerCount;
   }
 
   private void OnPromptHidden()
   {
-    IsOpen = false;
+    --_nearbyPlayerCount;
   }
 
   private void OnPlayerSpawned(PlayerController playerController)
@@ -207,6 +227,7 @@ public class Maw : MonoBehaviour
 
   private void CorrectChoiceMade(PlayerController byPlayer)
   {
+    _animator.SetBool("Happy", true);
     AudioManager.Instance.PlaySound(_eatSound);
     PickNewDesiredItem(byPlayer);
     ++_correctCount;
@@ -216,6 +237,7 @@ public class Maw : MonoBehaviour
   {
     ++_mistakeCount;
 
+    _animator.SetBool("Happy", false);
     AudioManager.Instance.PlaySound(_angrySound);
 
     foreach (PlayerController playerController in _desiredItems.Keys)
@@ -247,5 +269,24 @@ public class Maw : MonoBehaviour
     desiredItem.ShapeIndex = Random.Range(0, _itemPrefab.TypeCount);
 
     _desiredItems[forPlayer] = desiredItem;
+
+    Item itemDisplay;
+    if (!_desiredItemsDisplay.TryGetValue(forPlayer, out itemDisplay))
+    {
+      itemDisplay = Instantiate(_itemPrefab, _desiredItemSpawn);
+      itemDisplay.IsBeingHeld = true;
+      itemDisplay.transform.localPosition = Vector3.zero;
+      itemDisplay.transform.localRotation = Quaternion.identity;
+      itemDisplay.transform.localScale = Vector3.one;
+      _desiredItemsDisplay[forPlayer] = itemDisplay;
+    }
+
+    itemDisplay.Definition = desiredItem;
+
+    Renderer[] renderers = itemDisplay.GetComponentsInChildren<Renderer>();
+    foreach (Renderer r in renderers)
+    {
+      r.gameObject.layer = LayerMask.NameToLayer(forPlayer.GetComponent<Player>().ExclusiveLayerName);
+    }
   }
 }

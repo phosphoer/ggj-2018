@@ -68,7 +68,12 @@ public class PlayerController : MonoBehaviour
 
     if (_interactionController.ClosestInteractable != null)
     {
-      _cameraRig.IsZoomedOut = _interactionController.ClosestInteractable.GetComponent<Maw>() != null;
+      Maw maw = _interactionController.ClosestInteractable.GetComponent<Maw>();
+      _cameraRig.IsZoomedOut = maw != null;
+      if (maw != null && _character.HeldItem != null)
+      {
+        maw.IsOpen = true;
+      }
     }
     else
     {

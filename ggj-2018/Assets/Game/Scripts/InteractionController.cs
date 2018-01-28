@@ -24,7 +24,7 @@ public class InteractionController : MonoBehaviour
       if (_closestInteractable != null)
       {
         distToClosest = Vector3.Distance(_trackedTransform.position, _closestInteractable.transform.position);
-        if (distToClosest >= _closestInteractable.InteractionRadius)
+        if (distToClosest >= _closestInteractable.InteractionRadius || !_closestInteractable.enabled)
         {
           _closestInteractable.HidePrompt();
           _closestInteractable = null;

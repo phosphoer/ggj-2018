@@ -103,9 +103,6 @@ public class Item : MonoBehaviour
 
   private void Start()
   {
-    Randomize();
-    UpdateVisual();
-
     ++InstanceCount;
   }
 
