@@ -47,6 +47,15 @@ public class Maw : MonoBehaviour
   [SerializeField]
   private GameObject[] _victoryTorches = null;
 
+  [SerializeField]
+  private SoundBank _angrySound = null;
+
+  [SerializeField]
+  private SoundBank _eatSound = null;
+
+  [SerializeField]
+  private SoundBank _talkSound = null;
+
   private int _mistakeCount;
   private int _correctCount;
   private Dictionary<PlayerController, Item.ItemDefinition> _desiredItems;
@@ -144,6 +153,7 @@ public class Maw : MonoBehaviour
 
   private void CorrectChoiceMade(PlayerController byPlayer)
   {
+    AudioManager.Instance.PlaySound(_eatSound);
     PickNewDesiredItem(byPlayer);
     ++_correctCount;
   }
@@ -151,6 +161,8 @@ public class Maw : MonoBehaviour
   private void IncorrectChoiceMade(PlayerController byPlayer)
   {
     ++_mistakeCount;
+
+    AudioManager.Instance.PlaySound(_angrySound);
 
     foreach (PlayerController playerController in _desiredItems.Keys)
     {

@@ -42,6 +42,9 @@ public class Character : MonoBehaviour
   [SerializeField]
   private SoundBank _barfSound = null;
 
+  [SerializeField]
+  private SoundBank _barfStartSound = null;
+
   private Vector3 _moveDirection;
   private Vector3 _lastMoveDirection;
   private Item _heldItem;
@@ -112,6 +115,11 @@ public class Character : MonoBehaviour
   {
     _pendingItemVomit = item;
     _itemIsInUse = true;
+
+    if (_barfStartSound != null)
+    {
+      AudioManager.Instance.PlaySound(_barfStartSound);
+    }
 
     if (_characterAnimator != null)
     {

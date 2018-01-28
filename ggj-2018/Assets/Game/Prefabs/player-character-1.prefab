@@ -2571,6 +2571,7 @@ MonoBehaviour:
   _characterAnimator: {fileID: 114176250689009102}
   _transmuteType: 0
   _barfSound: {fileID: 11400000, guid: a591dd079326544cc9cc07fd44e0f1fc, type: 2}
+  _barfStartSound: {fileID: 11400000, guid: 8a9a43d970e1f442594a6bd8a949b561, type: 2}
 --- !u!135 &135444747741425728
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -2378,6 +2378,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  _angrySound: {fileID: 11400000, guid: fec7ad7bb47964c7ba6760964571144f, type: 2}
+  _eatSound: {fileID: 11400000, guid: a241f8322474d4b3e980275ec12610ca, type: 2}
+  _talkSound: {fileID: 11400000, guid: df438cae2906c4c1c8cc6abbf309c1a2, type: 2}
 --- !u!114 &114538865580959704
 MonoBehaviour:
   m_ObjectHideFlags: 1
