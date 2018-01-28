@@ -6,6 +6,9 @@ public class Creature : MonoBehaviour
   private Character _character = null;
 
   [SerializeField]
+  private Item _item = null;
+
+  [SerializeField]
   private Transform _animationAnchor = null;
 
   [SerializeField]
@@ -29,6 +32,7 @@ public class Creature : MonoBehaviour
   private void Start()
   {
     _animationTimer = Random.Range(0.0f, 10.0f);
+    _item.IsHeldChanged += OnHeldChanged;
   }
 
   private void Update()
@@ -47,5 +51,11 @@ public class Creature : MonoBehaviour
       Vector2 direction = Random.insideUnitCircle;
       _character.MoveDirection = new Vector3(direction.x, 0, direction.y);
     }
+  }
+
+  private void OnHeldChanged()
+  {
+    enabled = !_item.IsBeingHeld;
+    _character.enabled = enabled;
   }
 }

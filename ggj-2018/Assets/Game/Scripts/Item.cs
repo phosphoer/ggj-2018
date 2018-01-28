@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Item : MonoBehaviour
 {
+  public event System.Action IsHeldChanged;
+
   public enum TransmitTypeEnum
   {
     Face,
@@ -41,6 +43,11 @@ public class Item : MonoBehaviour
       else if (_reEnableRoutine == null)
       {
         StartCoroutine(ReEnableRoutine());
+      }
+
+      if (IsHeldChanged != null)
+      {
+        IsHeldChanged();
       }
     }
   }
