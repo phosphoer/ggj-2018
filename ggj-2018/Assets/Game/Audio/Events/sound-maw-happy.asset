@@ -11,10 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 200dcdc2f387a47cab1b461062e1b64d, type: 3}
   m_Name: sound-maw-happy
   m_EditorClassIdentifier: 
-  AudioClips: []
+  AudioClips:
+  - {fileID: 8300000, guid: c605d249c67b0bf47908f1666b2e5ce0, type: 3}
   IsSpatial: 0
   MaxDistance: 100
   MinDistance: 10
-  VolumeScale: 1
+  VolumeScale: 2
   IsLooping: 0
   AudioMixerGroup: {fileID: 0}

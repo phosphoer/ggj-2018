@@ -7,9 +7,22 @@ ModelImporter:
   fileIDToRecycleName:
     100000: FloorStones
     100002: //RootNode
+    100004: FloorStones 1
+    100006: FloorStones1
+    100008: HubFloor
+    100010: transform1
+    100012: transform2
+    100014: transform3
     400000: FloorStones
     400002: //RootNode
+    400004: FloorStones 1
+    400006: FloorStones1
+    400008: HubFloor
+    400010: transform1
+    400012: transform2
+    400014: transform3
     2100000: lambert2
+    2100002: lambert3
     2300000: FloorStones
     2300002: //RootNode
     3300000: FloorStones

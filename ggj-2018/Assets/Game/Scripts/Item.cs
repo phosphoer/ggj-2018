@@ -46,7 +46,7 @@ public class Item : MonoBehaviour
 
       if (_isBeingHeld)
       {
-        _interactable.enabled = false;
+        if (_interactable != null) _interactable.enabled = false;
       }
       else if (_reEnableRoutine == null)
       {
@@ -78,6 +78,9 @@ public class Item : MonoBehaviour
   [SerializeField]
   private Color[] _colors = null;
 
+  [SerializeField]
+  private SoundBank _creatureSound = null;
+
   private bool _isBeingHeld;
   private Coroutine _reEnableRoutine;
   private int _currentFaceIndex;
@@ -85,13 +88,13 @@ public class Item : MonoBehaviour
 
   public void TransmuteFace()
   {
-    _currentFaceIndex = (_currentFaceIndex + 1) % _faces.Length;
+    _currentFaceIndex = Maw.Instance.GetNextFaceIndex(_currentFaceIndex);
     UpdateVisual();
   }
 
   public void TransmuteShape()
   {
-    _currentShapeIndex = (_currentShapeIndex + 1) % _shapes.Length;
+    _currentShapeIndex = Maw.Instance.GetNextShapeIndex(_currentShapeIndex);
     UpdateVisual();
   }
 
@@ -99,16 +102,26 @@ public class Item : MonoBehaviour
   {
     _currentFaceIndex = Random.Range(0, _faces.Length);
     _currentShapeIndex = Random.Range(0, _shapes.Length);
+    UpdateVisual();
   }
 
   private void Start()
   {
     ++InstanceCount;
+    if (_interactable != null)
+    {
+      _interactable.PromptShown += OnPromptShown;
+    }
   }
 
   private void OnDestroy()
   {
     --InstanceCount;
+  }
+
+  private void OnPromptShown()
+  {
+    AudioManager.Instance.PlaySound(_creatureSound);
   }
 
   private void UpdateVisual()
@@ -129,14 +142,16 @@ public class Item : MonoBehaviour
     Renderer[] renderers = _shapes[_currentShapeIndex].GetComponentsInChildren<Renderer>();
     foreach (Renderer r in renderers)
     {
-      r.material.color = _colors[_currentFaceIndex];
+      for (int i = 0; i < r.materials.Length; ++i)
+        r.materials[i].color = _colors[_currentFaceIndex];
     }
   }
 
   private IEnumerator ReEnableRoutine()
   {
     yield return new WaitForSeconds(1.0f);
-    _interactable.enabled = true;
+    if (_interactable != null)
+      _interactable.enabled = true;
     _reEnableRoutine = null;
   }
 }

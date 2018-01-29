@@ -249,11 +249,23 @@ public class Character : MonoBehaviour
       _characterAnimator.IsCarrying = false;
     }
 
-    _heldItem.transform.SetParent(_heldItemOriginalParent);
-    _heldItem.gameObject.SetActive(false);
+    if (_heldItem != null)
+    {
+      _heldItem.transform.SetParent(_heldItemOriginalParent);
+      _heldItem.gameObject.SetActive(false);
 
-    TransmuteItem(_heldItem);
-    _pendingTransmitCharacter.ReceiveItem(_heldItem);
+      TransmuteItem(_heldItem);
+
+      if (_pendingTransmitCharacter != null)
+      {
+        _pendingTransmitCharacter.ReceiveItem(_heldItem);
+      }
+      else
+      {
+        ReceiveItem(_heldItem);
+      }
+    }
+
     _heldItem = null;
     _itemIsInUse = false;
 
@@ -296,5 +308,10 @@ public class Character : MonoBehaviour
     _itemIsInUse = false;
     _pendingItemVomit = null;
     _pendingTransmitCharacter = null;
+
+    if (_heldItem != null)
+    {
+      _heldItem.transform.localScale = Vector3.one;
+    }
   }
 }
