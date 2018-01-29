@@ -2611,6 +2611,7 @@ MonoBehaviour:
   _happySound: {fileID: 11400000, guid: 3777f4fcb3ef037489609a91f03cbf69, type: 2}
   _openSound: {fileID: 11400000, guid: b1d4c5787a4b57f48987fece4c6063c2, type: 2}
   _transformSound: {fileID: 11400000, guid: 68fc5538d8b9549d8a3861cf8611bc97, type: 2}
+  _fanfareSound: {fileID: 11400000, guid: 66a14451d5b9ab24b832c87fa98c22ae, type: 2}
   _typeCountPerGame: 3
   _creatureCount: 50
   _leftSpawnPoints:
@@ -9731,7 +9732,7 @@ ParticleSystemRenderer:
   m_Pivot: {x: 0, y: 0, z: 0}
   m_UseCustomVertexStreams: 0
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: 4300000, guid: 4ec5c923cf33d48b7b8c1f1f029dd767, type: 3}
+  m_Mesh: {fileID: 4300000, guid: f8c2ce29566730d4f883980a981cb8b3, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -9785,7 +9786,7 @@ ParticleSystemRenderer:
   m_Pivot: {x: 0, y: 0, z: 0}
   m_UseCustomVertexStreams: 0
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: 4300002, guid: 4ec5c923cf33d48b7b8c1f1f029dd767, type: 3}
+  m_Mesh: {fileID: 4300002, guid: f8c2ce29566730d4f883980a981cb8b3, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}

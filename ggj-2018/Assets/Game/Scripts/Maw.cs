@@ -67,6 +67,9 @@ public class Maw : Singleton<Maw>
   private SoundBank _transformSound = null;
 
   [SerializeField]
+  private SoundBank _fanfareSound = null;
+
+  [SerializeField]
   private int _typeCountPerGame = 3;
 
   [SerializeField]
@@ -263,6 +266,11 @@ public class Maw : Singleton<Maw>
   {
     --_nearbyPlayerCount;
     _speechXIcon.SetActive(false);
+
+    if (_nearbyPlayerCount == 0)
+    {
+      IsOpen = false;
+    }
   }
 
   private void OnPlayerSpawned(PlayerController playerController)
@@ -346,6 +354,7 @@ public class Maw : Singleton<Maw>
     yield return new WaitForSeconds(3.0f);
 
     // Wheeee /s
+    AudioManager.Instance.PlaySound(_fanfareSound);
     _confettiParticle.Play();
 
     yield return new WaitForSeconds(3.0f);
@@ -368,7 +377,7 @@ public class Maw : Singleton<Maw>
       playerController.Character.ReceiveItem(trophyItem);
     }
 
-    yield return new WaitForSeconds(10.0f);
+    yield return new WaitForSeconds(5.0f);
 
     // Zoom back out
     foreach (PlayerController playerController in players)
