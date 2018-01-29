@@ -142,7 +142,8 @@ public class Item : MonoBehaviour
     Renderer[] renderers = _shapes[_currentShapeIndex].GetComponentsInChildren<Renderer>();
     foreach (Renderer r in renderers)
     {
-      r.material.color = _colors[_currentFaceIndex];
+      for (int i = 0; i < r.materials.Length; ++i)
+        r.materials[i].color = _colors[_currentFaceIndex];
     }
   }
 
