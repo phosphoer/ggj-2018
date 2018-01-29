@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f1b8ebeb8776421290c8eb9a94f6322, type: 3}
   m_Name: build-windows
   m_EditorClassIdentifier: 
-  LocationPathName: ../build/no-monster/no-monster.exe
+  LocationPathName: ../build/no-monster-win/no-monster.exe
   ProductNameOverride: 
   CompanyNameOverride: 
   BuildTarget: 5
