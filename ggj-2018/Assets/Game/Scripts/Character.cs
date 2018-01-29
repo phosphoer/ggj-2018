@@ -308,10 +308,5 @@ public class Character : MonoBehaviour
     _itemIsInUse = false;
     _pendingItemVomit = null;
     _pendingTransmitCharacter = null;
-
-    if (_heldItem != null)
-    {
-      _heldItem.transform.localScale = Vector3.one;
-    }
   }
 }
