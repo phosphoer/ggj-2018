@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
-public class Maw : MonoBehaviour
+public class Maw : Singleton<Maw>
 {
   public bool IsOpen
   {
@@ -93,6 +93,9 @@ public class Maw : MonoBehaviour
   [SerializeField]
   private ParticleSystem _confettiParticle = null;
 
+  [SerializeField]
+  private Item _trophyItemPrefab = null;
+
   private int _mistakeCount;
   private int _correctCount;
   private Dictionary<PlayerController, Item.ItemDefinition> _desiredItems;
@@ -107,8 +110,24 @@ public class Maw : MonoBehaviour
   private int _nearbyPlayerCount;
   private float _spawnTimer;
 
+  public int GetNextFaceIndex(int index)
+  {
+    int nextIndex = _faceIndicesThisGame.IndexOf(index);
+    nextIndex = (nextIndex + 1) % _faceIndicesThisGame.Count;
+    return _faceIndicesThisGame[nextIndex];
+  }
+
+  public int GetNextShapeIndex(int index)
+  {
+    int nextIndex = _shapeIndicesThisGame.IndexOf(index);
+    nextIndex = (nextIndex + 1) % _shapeIndicesThisGame.Count;
+    return _shapeIndicesThisGame[nextIndex];
+  }
+
   private void Awake()
   {
+    Instance = this;
+
     _desiredItems = new Dictionary<PlayerController, Item.ItemDefinition>();
     _desiredItemsDisplay = new Dictionary<PlayerController, Item>();
     _eyeOriginalScale = _eyesTransform.localScale;
@@ -337,6 +356,18 @@ public class Maw : MonoBehaviour
       playerController.CameraRig.IsZoomedOut = false;
       playerController.CameraRig.IsZoomedIn = true;
     }
+
+    // Give the player a trophy
+    yield return new WaitForSeconds(3.0f);
+    Item trophyItem = Instantiate(_trophyItemPrefab);
+    trophyItem.IsBeingHeld = true;
+    trophyItem.gameObject.SetActive(false);
+
+    foreach (PlayerController playerController in players)
+    {
+      playerController.Character.ReceiveItem(trophyItem);
+    }
+
     yield return new WaitForSeconds(10.0f);
 
     // Zoom back out

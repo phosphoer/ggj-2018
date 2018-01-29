@@ -44,7 +44,7 @@ public class CameraRig : MonoBehaviour
       {
         _interpolating = false;
       }
-      if (IsZoomedOut)
+      if (IsZoomedOut || IsZoomedIn)
       {
         _interpolating = true;
       }

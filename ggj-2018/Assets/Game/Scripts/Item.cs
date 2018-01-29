@@ -46,7 +46,7 @@ public class Item : MonoBehaviour
 
       if (_isBeingHeld)
       {
-        _interactable.enabled = false;
+        if (_interactable != null) _interactable.enabled = false;
       }
       else if (_reEnableRoutine == null)
       {
@@ -88,13 +88,13 @@ public class Item : MonoBehaviour
 
   public void TransmuteFace()
   {
-    _currentFaceIndex = (_currentFaceIndex + 1) % _faces.Length;
+    _currentFaceIndex = Maw.Instance.GetNextFaceIndex(_currentFaceIndex);
     UpdateVisual();
   }
 
   public void TransmuteShape()
   {
-    _currentShapeIndex = (_currentShapeIndex + 1) % _shapes.Length;
+    _currentShapeIndex = Maw.Instance.GetNextShapeIndex(_currentShapeIndex);
     UpdateVisual();
   }
 
@@ -108,7 +108,10 @@ public class Item : MonoBehaviour
   private void Start()
   {
     ++InstanceCount;
-    _interactable.PromptShown += OnPromptShown;
+    if (_interactable != null)
+    {
+      _interactable.PromptShown += OnPromptShown;
+    }
   }
 
   private void OnDestroy()
@@ -146,7 +149,8 @@ public class Item : MonoBehaviour
   private IEnumerator ReEnableRoutine()
   {
     yield return new WaitForSeconds(1.0f);
-    _interactable.enabled = true;
+    if (_interactable != null)
+      _interactable.enabled = true;
     _reEnableRoutine = null;
   }
 }

@@ -304,7 +304,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4181788888320330}
-  - component: {fileID: 114806324455465030}
   - component: {fileID: 114033923226677198}
   - component: {fileID: 135071353389621248}
   - component: {fileID: 54927571728197138}
@@ -2293,20 +2292,6 @@ MonoBehaviour:
     m_RotationOrder: 0
   _changeDirectionTimeMin: 3
   _changeDirectionTimeMax: 6
---- !u!114 &114806324455465030
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1519906003675874}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29c9df42b8d601b42b538a060dbf3982, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  degreesPerSecond: 0
-  amplitude: 0.25
-  frequency: 1
 --- !u!135 &135071353389621248
 SphereCollider:
   m_ObjectHideFlags: 1

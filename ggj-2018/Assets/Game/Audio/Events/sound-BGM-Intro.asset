@@ -16,6 +16,6 @@ MonoBehaviour:
   IsSpatial: 0
   MaxDistance: 100
   MinDistance: 10
-  VolumeScale: 1
+  VolumeScale: 0.5
   IsLooping: 0
   AudioMixerGroup: {fileID: 0}

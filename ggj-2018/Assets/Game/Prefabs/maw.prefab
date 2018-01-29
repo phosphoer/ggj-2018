@@ -2630,6 +2630,8 @@ MonoBehaviour:
   _speechXIcon: {fileID: 1118050277251542}
   _skullAltar: {fileID: 0}
   _confettiParticle: {fileID: 198439992299343346}
+  _trophyItemPrefab: {fileID: 114989518293684110, guid: ee20b4a16554a4633ae9eb55e8dc1d26,
+    type: 2}
 --- !u!114 &114538865580959704
 MonoBehaviour:
   m_ObjectHideFlags: 1
