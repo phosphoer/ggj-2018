@@ -14,6 +14,9 @@ public class CameraRig : MonoBehaviour
   private Vector3 _cameraOffset = new Vector3(0, 4, -10);
 
   [SerializeField]
+  private float _cameraMoveSpeed = 3.0f;
+
+  [SerializeField]
   private float _panOutScale = 1.25f;
 
   [SerializeField]
@@ -51,7 +54,7 @@ public class CameraRig : MonoBehaviour
 
       if (_interpolating)
       {
-        transform.position = Mathfx.Damp(transform.position, desiredPos, 0.5f, Time.deltaTime * 1.0f);
+        transform.position = Mathfx.Damp(transform.position, desiredPos, 0.5f, Time.deltaTime * _cameraMoveSpeed);
       }
       else
       {
