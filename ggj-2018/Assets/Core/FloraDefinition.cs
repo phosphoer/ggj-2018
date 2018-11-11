@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "new-flora", menuName = "BoatGame/Flora Definition")]
+[CreateAssetMenu(fileName = "new-flora", menuName = "Flora Definition")]
 public class FloraDefinition : ScriptableObject
 {
   public Mesh Mesh;

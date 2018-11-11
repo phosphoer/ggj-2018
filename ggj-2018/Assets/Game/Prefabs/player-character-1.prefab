@@ -2569,6 +2569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 6
+  _heldItemSpeedMultiplier: 0.75
   _rigidBody: {fileID: 54073025398787208}
   _heldItemAnchor: {fileID: 4359216024818256}
   _vomitAnchor: {fileID: 4416746519464120}

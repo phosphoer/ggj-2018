@@ -16,10 +16,15 @@ public class Character : MonoBehaviour
     set { _heldItem = value; }
   }
 
+  public bool IsHoldingItem { get { return HeldItem != null; } }
+
   public bool IsBusy { get { return _itemIsInUse; } }
 
   [SerializeField]
   private float _moveSpeed = 1.0f;
+
+  [SerializeField]
+  private float _heldItemSpeedMultiplier = 0.5f;
 
   [SerializeField]
   private Rigidbody _rigidBody = null;
@@ -150,6 +155,11 @@ public class Character : MonoBehaviour
   {
     Vector3 moveVector = MoveDirection * _moveSpeed * Time.deltaTime;
     moveVector.y = 0;
+
+    if (IsHoldingItem)
+    {
+      moveVector *= _heldItemSpeedMultiplier;
+    }
 
     if (IsBusy)
     {
